@@ -1,0 +1,244 @@
+ManifestFileVersion: 0
+CRC: 3340842767
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: eae8b37fadd7c06a82a88b4456b88454
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fb255b02e1f0e3b507f097488dccc3d5
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 184f6840fdfb789498e765325c7fbd0d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71626e607eacaf5418cd4579e9c9b896, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ae942c9068183dc40a9d01f648273726, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5c041f61e4a9fbf4e830210f5d933ece, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 75e7459110b9666449485c40f25362a5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a62fbe14d16b1741810c8b0aaa9e203, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3fa597625ab0147bea791e745e53f74f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8f5c7ca2ef34966429d161e3d3676ee4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d81807633ea807d4c8e3fff7e10c6000, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9e2747e3775af504da1a4d5a46c5a1ce, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0b4eb3a400afab046abb8471a9d746d6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a21112d40bb29ae45bfed61f4751d812, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ffb082a5f47cb424596585263f713d2c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aa3d72b5db2864cd685df581e550d633, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 28de86d59ff31cf43966c04f7a8796f8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f3e7c51686c6d4aff914a47efe1b1b91, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7ef89f3689a7f449c8f7679fa7768611, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2c5ecb5660b11414fb042fb826e03b73, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c8077b76001d36d489868d20d28bddb9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 70e94e8676eff4447a181fc8babfbeef, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d7f448e670d9e0343b3436e1c2969009, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 27752ee67bab5445584f5341bafba553, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8aae42f634d453449b24c5d5582d4807, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 446d504799d99174383957fca80713c8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 363799475c56b954893271f089d06ebd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d5c5ca47aa5c01740810b7c66662099f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0c627377f321ded408a69385ca90e2d1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1f2a739765ee94dfca4b8f7b76e1430f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a92b5d748695fd44aac9feef17ba415, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f6a468288199d468f9bb4ba16e7c20c3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ac5060295fbd39b4a88d20d0c83d925e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cae5aea99dc1d4d22864b58581923d52, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 04d1b7c9e9a19a24ab67123a43c6544b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8c54c7c9c14b22444bc49eae63a21019, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f2fa36e935ccc794980d475cb2e29bf2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e380d7f9ca1714378bba76de71ca04bc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e6a4d90ac369b414599f2e0cb7400af9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6d6df33aeb51f41a6812f6779cc368ae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d65b474abeb42432789479762fc786db, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6bc8a06a381419b4c88be342341202b5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 40b3ca7a0503f6c408fdc4fd810a82ec, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6d5ee4aa9b2f24de0be1e0d88f28ec91, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9b202fea542cfac43b87ef5b4ebda358, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 07c4de3b4b6fe9045b059ee627c100df, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0d81834b7ba67804baf7e3315986006a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 70a6a08b8190a0941b903273ccefc636, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f8376a2cfcf92644f966626f8fa84afe, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b5f48ecc218d2db49baa9ac1bfe73ba9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ebc115dcc57071540813221dfc3b9f22, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b1bd99dcf43f97d48bb6215c70f0cd40, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0a9b654d07459c64ebe8a38959aae386, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f63b117dfa1306843ad80aaf795d56ba, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9d9ee9adcf574fc42857acfaad9fb89e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 753810cdd3b7d994d89233eaf3f4c8d8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 66ca9c6e5cbd4544ab22016a27d817a4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1a2f00be6ef954606adbd582de194da1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d38e952ff7e856c47a9d5f8574c682c6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5612c82f0abb1f4448386a44602630c8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8c58de7f44691c843bbd32527206913d, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Atlas/General/Input/AtlasInput.mat
+- Assets/Prefabs/BaCay/DanhBienSymbol.prefab
+- Assets/Atlas/MiniGame/MiniGameAtlas.png
+- Assets/Prefabs/CardObject.prefab
+- Assets/Prefabs/BauCua/BauCua.prefab
+- Assets/Prefabs/PlayerMessagePopup.prefab
+- Assets/Prefabs/LeaderBoard.prefab
+- Assets/Atlas/Card/Card.mat
+- Assets/Atlas/Gameplay/Top.prefab
+- Assets/Prefabs/Dialogs/LoadingView.prefab
+- Assets/Prefabs/Button Basic.prefab
+- Assets/Prefabs/LayoutMiniGame.prefab
+- Assets/Prefabs/ChatBox.prefab
+- Assets/Prefabs/Dialogs/DialogHistory.prefab
+- Assets/Prefabs/BauCua/BauCuaHistory.prefab
+- Assets/Prefabs/BaCay/BaCayReward.prefab
+- Assets/Atlas/HallScene/HallSceneAtlas.mat
+- Assets/Prefabs/ButtonBet.prefab
+- Assets/Atlas/General/Icon/AtlasIcon.prefab
+- Assets/Prefabs/Dialogs/DialogSecurity.prefab
+- Assets/Prefabs/BaseAvatar.prefab
+- Assets/Atlas/Gameplay/Gameplay.mat
+- Assets/Prefabs/Manager/NotificationManager.prefab
+- Assets/Prefabs/Label Background.prefab
+- Assets/Prefabs/Dialogs/DialogProfile.prefab
+- Assets/Prefabs/Dialogs/DialogWebview.prefab
+- Assets/Materials/Money.mat
+- Assets/Atlas/Gameplay/Gameplay.prefab
+- Assets/Atlas/MiniGame/DiceAnimation.prefab
+- Assets/Atlas/General/Input/AtlasInput.prefab
+- Assets/Prefabs/Cash.prefab
+- Assets/Atlas/MiniGame/MiniGameAtlas.prefab
+- Assets/Prefabs/GlobalNotification.prefab
+- Assets/Prefabs/MiniGame Item.prefab
+- Assets/Atlas/General/Background/AtlasGeneral.png
+- Assets/Materials/StarHighlight.mat
+- Assets/Prefabs/TopBar.prefab
+- Assets/Atlas/General/Input/AtlasInput.png
+- Assets/Prefabs/Effects/WinParticle.prefab
+- Assets/Prefabs/Manager/NotificationText.prefab
+- Assets/Atlas/Card/Card.prefab
+- Assets/Prefabs/Dialogs/DialogConfirm.prefab
+- Assets/Materials/WinHighlight.mat
+- Assets/Prefabs/Dialogs/Toast.prefab
+- Assets/Prefabs/RewardManager.prefab
+- Assets/Prefabs/TaiXiu/TaiXiu.prefab
+- Assets/Atlas/General/Icon/AtlasIcon.png
+- Assets/Atlas/MiniGame/DiceAnimation.png
+- Assets/Atlas/HallScene/HallSceneAtlas.png
+- Assets/Prefabs/Dialogs/DialogRecharge.prefab
+- Assets/Atlas/Card/Card.png
+- Assets/Prefabs/Effects/Xu.prefab
+- Assets/Prefabs/Effects/FlyXu.prefab
+- Assets/Prefabs/LabelCounter.prefab
+- Assets/Atlas/HallScene/HallSceneAtlas.prefab
+- Assets/Prefabs/XocDia/DotStatistic.prefab
+- Assets/Atlas/MiniGame/MiniGameAtlas.mat
+- Assets/Atlas/General/Icon/AtlasIcon.mat
+- Assets/Atlas/General/Background/AtlasGeneral.mat
+- Assets/Prefabs/Input Basic.prefab
+- Assets/Prefabs/LabelStartEnd.prefab
+- Assets/Prefabs/Dialogs/DialogChangePass.prefab
+- Assets/Prefabs/Effects/FlyMoney.prefab
+- Assets/Atlas/General/Background/AtlasGeneral.prefab
+- Assets/Atlas/MiniGame/DiceAnimation.mat
+- Assets/Prefabs/Button Text Basic.prefab
+- Assets/Atlas/Gameplay/Gameplay.png
+- Assets/Prefabs/Debug/TestMode.prefab
+- Assets/Prefabs/TextMoney.prefab
+Dependencies: []
