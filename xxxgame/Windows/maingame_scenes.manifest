@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 100176627
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d6aa3d7b1e2b506b82c9beff75a5be35
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/Scenes/GameHallScene.unity
+- Assets/Scenes/Lieng.unity
+- Assets/Scenes/Sam.unity
+- Assets/Scenes/Splash.unity
+- Assets/Scenes/BaCay.unity
+- Assets/Scenes/HallScene.unity
+- Assets/Scenes/LoginScene.unity
+- Assets/Scenes/BaCayNAT.unity
+- Assets/Scenes/TLMN.unity
+- Assets/Scenes/XocDia.unity
+Dependencies:
+- D:/Projects/xxxgame-client/AssetBundles/Windows/maingame
