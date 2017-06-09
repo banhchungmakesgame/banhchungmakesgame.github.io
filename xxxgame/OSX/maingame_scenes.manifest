@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 1924496571
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 40f78db07af77b0c5a3ccfb342a3f652
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/Scenes/GameHallScene.unity
+- Assets/Scenes/Lieng.unity
+- Assets/Scenes/Sam.unity
+- Assets/Scenes/Splash.unity
+- Assets/Scenes/BaCay.unity
+- Assets/Scenes/HallScene.unity
+- Assets/Scenes/LoginScene.unity
+- Assets/Scenes/BaCayNAT.unity
+- Assets/Scenes/TLMN.unity
+- Assets/Scenes/XocDia.unity
+Dependencies:
+- /Users/vutienhung/Documents/Projects/xxxgame-client/AssetBundles/OSX/maingame

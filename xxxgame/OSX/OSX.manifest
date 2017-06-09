@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 4056865223
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: maingame_scenes
+      Dependencies:
+        Dependency_0: maingame
+    Info_1:
+      Name: maingame
+      Dependencies: {}
