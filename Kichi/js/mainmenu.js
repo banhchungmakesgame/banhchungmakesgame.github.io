@@ -50,7 +50,7 @@ TH.MainMenu.prototype =
         playButton.visible = false;
 
         var style = { font: "30px Tahoma", fill: "#00d20a", align: "center" };
-        helloText = game.add.text(game.world.centerX, game.world.centerY + 55, 'Hello: ', style);
+        helloText = game.add.text(game.world.centerX, game.world.centerY + 100, 'Hello: ', style);
         helloText.anchor.set(0.5);
         helloText.visible = false;
 
@@ -115,6 +115,7 @@ TH.MainMenu.prototype =
                     'GET',
                     {"fields":"id,name"},
                     function(response) {
+                        console.log(response);
                         helloText.setText('Hello: ', response.name);
                     }
                 );
@@ -131,6 +132,7 @@ TH.MainMenu.prototype =
                             'GET',
                             {"fields":"id,name"},
                             function(response) {
+                                console.log(response);
                                 helloText.setText('Hello: ', response.name);
                             }
                         );

@@ -26,6 +26,8 @@ TH.Gameplay.prototype =
     }, 
     create: function()
     {      
+        var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
+        bg.anchor.set(0.5);
         nextFire = 0;
         fireRate = 400;
         
