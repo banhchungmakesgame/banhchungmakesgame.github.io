@@ -10,8 +10,8 @@ TH.Boot.prototype =
     init: function()
     {
         this.input.maxPointers = 1;
-        this.scale.scaleMode= Phaser.ScaleManager.SHOW_ALL;
-        this.scale.pageAlignHorizontally = true;
+        game.time.advancedTiming = true;
+        //this.scale.pageAlignHorizontally = true;
     },
     preload: function()
     {
