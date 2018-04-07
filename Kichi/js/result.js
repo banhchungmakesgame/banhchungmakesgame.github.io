@@ -69,8 +69,8 @@ TH.Result.prototype =
             link: 'https://zzvutienhung.github.io/Kichi/',
             name: 'Cung choi game cua kichi nao',
           }, function(response){
-              console.log(response);
-              game.state.start('MainMenu');
+              if(response.success)
+                game.state.start('MainMenu');
           });
     },
     onClickNhanQua: function()
