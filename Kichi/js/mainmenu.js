@@ -18,7 +18,9 @@ window.fbAsyncInit = function() {
 TH.MainMenu = function(game){
     
 };
-
+var playButton;
+var helloText;
+var fbBtn;
 TH.MainMenu.prototype = 
 {
     init: function()
@@ -34,11 +36,22 @@ TH.MainMenu.prototype =
         var title = game.add.image(game.world.centerX, 200, 'title');
         title.anchor.set(0.5);
 
-        var playButton = this.add.image(game.world.centerX, game.world.centerY, 'fb_login');
+        fbBtn = this.add.image(game.world.centerX, game.world.centerY, 'fb_login');
+        fbBtn.anchor.set(0.5);
+        fbBtn.scale.setTo(0.5, 0.5);
+        fbBtn.inputEnabled = true;
+        fbBtn.events.onInputDown.add(this.onClickOnBtnFB, this);
+
+        playButton = this.add.image(game.world.centerX, game.world.centerY, 'play');
         playButton.anchor.set(0.5);
-        playButton.scale.setTo(0.5, 0.5);
+        playButton.scale.setTo(1, 1);
         playButton.inputEnabled = true;
-        playButton.events.onInputDown.add(this.onClickOnBtnPlay, this);
+        playButton.events.onInputDown.add(this.onClickOnBtnFB, this);
+        playButton.visible = false;
+
+        var style = { font: "65px Tahoma", fill: "#ff0044", align: "center" };
+        helloText = game.add.text(game.world.centerX, game.world.centerY + 40, 'Hello: ', style);
+        helloText.visible = false;
 
         var rulesBtn = this.add.image(game.world.centerX + 75, game.world.height - 100, 'rules');
         rulesBtn.anchor.set(0.5);
@@ -52,22 +65,45 @@ TH.MainMenu.prototype =
         giftBtn.inputEnabled = true;
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
     },
-    onClickOnBtnPlay: function(){
+    onClickOnBtnFB: function(){
         FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-              console.log('Logged in.');
+            if (response.status == 'connected') {
+                fbBtn.visible = false;
+                playButton.visible = true;
+                helloText.visible = true;
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"id,name"},
+                    function(response) {
+                        helloText.setText('Hello: ', response.name);
+                    }
+                );
             }
             else {
                 FB.login(function(response) {
-                    if (response.status === 'connected') {
+                    if (response.status == 'connected') {
                         // Logged into your app and Facebook.
-                        console.log('logged in.');
+                        fbBtn.visible = false;
+                        playButton.visible = true;
+                        helloText.visible = true;
+                        FB.api(
+                            '/me',
+                            'GET',
+                            {"fields":"id,name"},
+                            function(response) {
+                                helloText.setText('Hello: ', response.name);
+                            }
+                        );
                     } else {
                         // The person is not logged into this app or we are unable to tell. 
                     }
                 });
             }
         });
+    },
+    onClickOnBtnPlay: function(){
+        game.state.start('Gameplay');
     },
     onClickOnBtnRules: function(){
         
