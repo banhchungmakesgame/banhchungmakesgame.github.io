@@ -16,10 +16,15 @@ TH.Boot.prototype =
     preload: function()
     {
         this.load.image('preloaderBar', 'assets/progress.png');
+        this.load.image('bg', 'assets/bg.png');
+        this.load.image('title', 'assets/title.png');
     }, 
     create: function()
     {        
-        game.stage.backgroundColor = '#A5C'
+        var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
+        bg.anchor.set(0.5);
+        var title = game.add.image(game.world.centerX, 200, 'title');
+        title.anchor.set(0.5);
         this.state.start('Preloader');
     }
 };
