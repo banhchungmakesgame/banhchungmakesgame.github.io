@@ -30,6 +30,8 @@ TH.Preloader.prototype =
         this.load.image('fb_login', 'assets/fb_login.png');     
         this.load.image('rules', 'assets/rules.png');
         this.load.image('gift', 'assets/gift.png');
+        this.load.image('score_bg', 'assets/score_bg.png');
+        this.load.image('button', 'assets/button.png');
     }, 
     create: function()
     {             

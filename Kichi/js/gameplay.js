@@ -9,7 +9,6 @@ var fireRate;
 var nextFire; 
 var spacebarKey;
 var isReversing = false;
-var score = 0;
 var scoreText;
 var itemSpawnSpeed = 1000;
 var currentTimer;
@@ -141,8 +140,8 @@ TH.Gameplay.prototype =
     },
     collisionHandler: function(bullet, item)
     {
-        score += 5;
-        scoreText.setText('SCORE: ' + score);
+        TH.score += 5;
+        scoreText.setText('SCORE: ' + TH.score);
         bullet.kill();
         game.tweens.removeFrom(item);
         item.kill();
