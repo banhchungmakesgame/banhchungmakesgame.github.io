@@ -46,11 +46,11 @@ TH.MainMenu.prototype =
         playButton.anchor.set(0.5);
         playButton.scale.setTo(1, 1);
         playButton.inputEnabled = true;
-        playButton.events.onInputDown.add(this.onClickOnBtnFB, this);
+        playButton.events.onInputDown.add(this.onClickOnBtnPlay, this);
         playButton.visible = false;
 
-        var style = { font: "40px Tahoma", fill: "#ff0044", align: "center" };
-        helloText = game.add.text(game.world.centerX, game.world.centerY + 40, 'Hello: ', style);
+        var style = { font: "30px Tahoma", fill: "#00d20a", align: "center" };
+        helloText = game.add.text(game.world.centerX, game.world.centerY + 55, 'Hello: ', style);
         helloText.anchor.set(0.5);
         helloText.visible = false;
 
