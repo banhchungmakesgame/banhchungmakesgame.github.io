@@ -77,7 +77,7 @@ TH.MainMenu.prototype =
                     {"fields":"id,name"},
                     function(response) {
                         console.log(response);
-                        helloText.setText('Hello: ', response.name);
+                        helloText.setText('Hello: ' + response.name);
                     }
                 );
             }
@@ -94,7 +94,7 @@ TH.MainMenu.prototype =
                             {"fields":"id,name"},
                             function(response) {
                                 console.log(response);
-                                helloText.setText('Hello: ', response.name);
+                                helloText.setText('Hello: ' + response.name);
                             }
                         );
                     } else {
@@ -116,7 +116,7 @@ TH.MainMenu.prototype =
                     {"fields":"id,name"},
                     function(response) {
                         console.log(response);
-                        helloText.setText('Hello: ', response.name);
+                        helloText.setText('Hello: ' + response.name);
                     }
                 );
             }
@@ -133,7 +133,7 @@ TH.MainMenu.prototype =
                             {"fields":"id,name"},
                             function(response) {
                                 console.log(response);
-                                helloText.setText('Hello: ', response.name);
+                                helloText.setText('Hello: ' + response.name);
                             }
                         );
                     } else {
