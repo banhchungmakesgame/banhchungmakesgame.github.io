@@ -49,8 +49,9 @@ TH.MainMenu.prototype =
         playButton.events.onInputDown.add(this.onClickOnBtnFB, this);
         playButton.visible = false;
 
-        var style = { font: "65px Tahoma", fill: "#ff0044", align: "center" };
+        var style = { font: "40px Tahoma", fill: "#ff0044", align: "center" };
         helloText = game.add.text(game.world.centerX, game.world.centerY + 40, 'Hello: ', style);
+        helloText.anchor.set(0.5);
         helloText.visible = false;
 
         var rulesBtn = this.add.image(game.world.centerX + 75, game.world.height - 100, 'rules');
@@ -64,6 +65,44 @@ TH.MainMenu.prototype =
         giftBtn.scale.setTo(0.5, 0.5);
         giftBtn.inputEnabled = true;
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
+
+        FB.getLoginStatus(function(response) {
+            if (response.status == 'connected') {
+                fbBtn.visible = false;
+                playButton.visible = true;
+                helloText.visible = true;
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"id,name"},
+                    function(response) {
+                        console.log(response);
+                        helloText.setText('Hello: ', response.name);
+                    }
+                );
+            }
+            else {
+                FB.login(function(response) {
+                    if (response.status == 'connected') {
+                        // Logged into your app and Facebook.
+                        fbBtn.visible = false;
+                        playButton.visible = true;
+                        helloText.visible = true;
+                        FB.api(
+                            '/me',
+                            'GET',
+                            {"fields":"id,name"},
+                            function(response) {
+                                console.log(response);
+                                helloText.setText('Hello: ', response.name);
+                            }
+                        );
+                    } else {
+                        // The person is not logged into this app or we are unable to tell. 
+                    }
+                });
+            }
+        });
     },
     onClickOnBtnFB: function(){
         FB.getLoginStatus(function(response) {
