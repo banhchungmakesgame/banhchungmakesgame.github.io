@@ -34,7 +34,7 @@ TH.Preloader.prototype =
         this.load.image('button', 'assets/button.png');
     }, 
     create: function()
-    {             
+    {  
         game.state.start("MainMenu");
     }    
 };

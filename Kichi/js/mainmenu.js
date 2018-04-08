@@ -30,11 +30,7 @@ TH.MainMenu.prototype =
     {
     }, 
     create: function()
-    {      
-        // Maintain aspect ratio
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        
+    {             
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
         var title = game.add.image(game.world.centerX, 200, 'title');
