@@ -62,15 +62,15 @@ TH.Result.prototype =
     },
     onClickShareWF: function()
     {
-        FB.ui({
-            method: 'send',
+        FB.ui({ method: 'feed', 
+            message: 'Cung choi game cua kichi nao',
+            name: 'Send message',
             link: 'https://zzvutienhung.github.io/Kichi/',
-            name: 'Cung choi game cua kichi nao',
-            quote: 'Cung nhau choi game cua kichi nao'
-          }, function(response){
-              if(response)
-                game.state.start('MainMenu');
-          });
+            picture: 'http://kichi.com.vn/media/3206/kichi-copy.png',
+            caption: 'Kichi Lẩu Chiến',
+            description: 'Chơi game Kichi nhận quà ưu đãi',
+            display: 'touch' // TAKE NOTE
+        });
     },
     onClickNhanQua: function()
     {
