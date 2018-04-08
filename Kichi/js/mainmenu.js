@@ -31,6 +31,8 @@ TH.MainMenu.prototype =
     }, 
     create: function()
     {      
+        // Maintain aspect ratio
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
         //game.state.start('Gameplay');
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
@@ -145,6 +147,7 @@ TH.MainMenu.prototype =
         });
     },
     onClickOnBtnPlay: function(){
+        game.scale.startFullScreen();
         game.state.start('Gameplay');
     },
     onClickOnBtnRules: function(){
