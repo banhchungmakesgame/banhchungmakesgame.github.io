@@ -23,6 +23,10 @@ TH.Boot.prototype =
     }, 
     create: function()
     {        
+        this.scale.pageAlignHorizontally = true;
+        this.scale.forceOrientation(true, false);
+        game.scale.setShowAll();
+        game.scale.refresh();
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
         var title = game.add.image(game.world.centerX, 200, 'title');

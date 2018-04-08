@@ -33,7 +33,8 @@ TH.MainMenu.prototype =
     {      
         // Maintain aspect ratio
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
-        //game.state.start('Gameplay');
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
         var title = game.add.image(game.world.centerX, 200, 'title');
@@ -68,7 +69,7 @@ TH.MainMenu.prototype =
         giftBtn.scale.setTo(0.5, 0.5);
         giftBtn.inputEnabled = true;
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
-
+        
         FB.getLoginStatus(function(response) {
             if (response.status == 'connected') {
                 fbBtn.visible = false;
@@ -147,13 +148,15 @@ TH.MainMenu.prototype =
         });
     },
     onClickOnBtnPlay: function(){
-        game.scale.startFullScreen();
+        this.game.scale.setMaximum();
+        this.game.scale.startFullScreen(false); //true=antialiasing ON, false=antialiasing off
         game.state.start('Gameplay');
     },
     onClickOnBtnRules: function(){
         
     },
     onClickOnBtnGift: function(){
-        
+        this.game.scale.setMaximum();
+        this.game.scale.startFullScreen(false);
     }
 };
