@@ -64,13 +64,14 @@ TH.Result.prototype =
     onClickShareWF: function()
     {
         FB.ui({
-            method: 'send',
+            method: 'share',
             link: 'https://zzvutienhung.github.io/Kichi/',
             name: 'Cung choi game cua kichi nao',
             quote: 'Cung nhau choi game cua kichi nao',
             display: 'popup'
           }, function(response){
               if(response)
+                console.log(response);
                 game.state.start('MainMenu');
           });
     },
