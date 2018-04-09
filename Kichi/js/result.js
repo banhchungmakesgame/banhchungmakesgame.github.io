@@ -65,7 +65,7 @@ TH.Result.prototype =
     {
         FB.ui({
             method: 'share',
-            link: 'https://zzvutienhung.github.io/Kichi/',
+            href: 'https://zzvutienhung.github.io/Kichi/',
             name: 'Cung choi game cua kichi nao',
             quote: 'Cung nhau choi game cua kichi nao',
             display: 'popup'
