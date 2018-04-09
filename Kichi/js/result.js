@@ -57,7 +57,6 @@ TH.Result.prototype =
         FB.ui({
             method: 'share',
             href: 'https://zzvutienhung.github.io/Kichi/',
-            quote: 'Cung nhau choi game cua kichi nao',
             display: 'popup'
           }, function(response){});
     },
@@ -66,8 +65,6 @@ TH.Result.prototype =
         FB.ui({
             method: 'share',
             href: 'https://zzvutienhung.github.io/Kichi/',
-            name: 'Cung choi game cua kichi nao',
-            quote: 'Cung nhau choi game cua kichi nao',
             display: 'popup'
           }, function(response){
               if(response)
