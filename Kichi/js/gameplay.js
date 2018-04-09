@@ -1,4 +1,4 @@
-TH.Gameplay = function(game){
+TH.Gameplay = function(){
     
 };
 

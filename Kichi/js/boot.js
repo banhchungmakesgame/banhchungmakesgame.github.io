@@ -2,7 +2,7 @@ var TH = {
     score : 0
 };
 
-TH.Boot = function(game)
+TH.Boot = function()
 {
     
 };

@@ -1,6 +1,6 @@
 
 
-TH.Preloader = function(game){
+TH.Preloader = function(){
     
 };
 

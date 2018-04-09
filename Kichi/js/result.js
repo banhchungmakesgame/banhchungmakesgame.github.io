@@ -1,6 +1,6 @@
 
 
-TH.Result = function(game){
+TH.Result = function(){
     
 };
 
