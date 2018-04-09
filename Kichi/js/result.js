@@ -67,7 +67,6 @@ TH.Result.prototype =
             href: 'https://zzvutienhung.github.io/Kichi/',
             display: 'popup'
           }, function(response){
-              if(response)
                 console.log(response);
                 game.state.start('MainMenu');
           });
