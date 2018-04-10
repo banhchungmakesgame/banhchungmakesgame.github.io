@@ -1,9 +1,10 @@
 window.fbAsyncInit = function() {
     FB.init({
       appId            : '158000174877255',
-      autoLogAppEvents : true,
-      xfbml            : false,
-      version          : 'v2.12'
+      autoLogAppEvents : false,
+      xfbml            : true,
+      version          : 'v2.12',
+      status           : true
     });
   };
 
@@ -67,8 +68,9 @@ TH.MainMenu.prototype =
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
     },
     onClickOnBtnFB: function(){
-        FB.getLoginStatus(function(response) {
+        FB.login(function(response) {
             if (response.status == 'connected') {
+                // Logged into your app and Facebook.
                 fbBtn.visible = false;
                 playButton.visible = true;
                 helloText.visible = true;
@@ -81,27 +83,8 @@ TH.MainMenu.prototype =
                         helloText.setText('Hello: ' + response.name);
                     }
                 );
-            }
-            else {
-                FB.login(function(response) {
-                    if (response.status == 'connected') {
-                        // Logged into your app and Facebook.
-                        fbBtn.visible = false;
-                        playButton.visible = true;
-                        helloText.visible = true;
-                        FB.api(
-                            '/me',
-                            'GET',
-                            {"fields":"id,name"},
-                            function(response) {
-                                console.log(response);
-                                helloText.setText('Hello: ' + response.name);
-                            }
-                        );
-                    } else {
-                        // The person is not logged into this app or we are unable to tell. 
-                    }
-                });
+            } else {
+                // The person is not logged into this app or we are unable to tell. 
             }
         });
     },
