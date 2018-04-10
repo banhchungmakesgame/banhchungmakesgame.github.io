@@ -1,10 +1,9 @@
 window.fbAsyncInit = function() {
     FB.init({
       appId            : '158000174877255',
-      autoLogAppEvents : false,
-      xfbml            : true,
+      autoLogAppEvents : true,
+      xfbml            : false,
       version          : 'v2.12',
-      status           : true
     });
   };
 
@@ -29,6 +28,7 @@ TH.MainMenu.prototype =
     },
     preload: function()
     {
+        
     }, 
     create: function()
     {             
@@ -68,9 +68,11 @@ TH.MainMenu.prototype =
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
     },
     onClickOnBtnFB: function(){
-        FB.login(function(response) {
+        FB.getLoginStatus(function(response) {
+
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
+                var accessToken = response.authResponse.accessToken;
                 fbBtn.visible = false;
                 playButton.visible = true;
                 helloText.visible = true;
@@ -81,12 +83,33 @@ TH.MainMenu.prototype =
                     function(response) {
                         console.log(response);
                         helloText.setText('Hello: ' + response.name);
+                        this.gamesparksFacebookAuthenticate(accessToken, response.name);
                     }
                 );
             } else {
-                // The person is not logged into this app or we are unable to tell. 
+                FB.login(function(response) {
+                    if (response.status == 'connected') {
+                        // Logged into your app and Facebook.
+                        var accessToken = response.authResponse.accessToken;
+                        fbBtn.visible = false;
+                        playButton.visible = true;
+                        helloText.visible = true;
+                        FB.api(
+                            '/me',
+                            'GET',
+                            {"fields":"id,name"},
+                            function(response) {
+                                console.log(response);
+                                helloText.setText('Hello: ' + response.name);
+                                this.gamesparksFacebookAuthenticate(accessToken, response.name);
+                            }
+                        );
+                    } else {
+                        // The person is not logged into this app or we are unable to tell. 
+                    }
+                });
             }
-        });
+        });         
     },
     onClickOnBtnPlay: function(){
         this.game.scale.setMaximum();
@@ -99,5 +122,19 @@ TH.MainMenu.prototype =
     onClickOnBtnGift: function(){
         this.game.scale.setMaximum();
         this.game.scale.startFullScreen(false);
+    },
+    gamesparksFacebookAuthenticate : function(tokenFB, displayName)
+    {
+        var request = new SparkRequests.FacebookConnectRequest();
+        request.accessToken = tokenFB;
+        request.syncDisplayName = displayName;
+        var response = request.Send();
+
+        console.log("authToken = " + response.authToken); 
+        console.log("displayName = " + response.displayName); 
+        console.log("newPlayer = " + response.newPlayer); 
+        console.log("scriptData = " + response.scriptData); 
+        console.log("switchSummary = " + response.switchSummary); 
+        console.log("userId = " + response.userId); 
     }
 };
