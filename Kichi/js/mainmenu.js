@@ -72,7 +72,7 @@ TH.MainMenu.prototype =
 
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
-                var accessToken = response.authResponse.accessToken;
+                TH.fbAccessToken = response.authResponse.accessToken;
                 fbBtn.visible = false;
                 playButton.visible = true;
                 helloText.visible = true;
@@ -83,7 +83,7 @@ TH.MainMenu.prototype =
                     function(response) {
                         console.log(response);
                         helloText.setText('Hello: ' + response.name);
-                        this.gamesparksFacebookAuthenticate(accessToken, response.name);
+                        TH.fbUserName = response.name;
                     }
                 );
             } else {
@@ -101,7 +101,7 @@ TH.MainMenu.prototype =
                             function(response) {
                                 console.log(response);
                                 helloText.setText('Hello: ' + response.name);
-                                this.gamesparksFacebookAuthenticate(accessToken, response.name);
+                                TH.fbUserName = response.name;
                             }
                         );
                     } else {
@@ -109,9 +109,11 @@ TH.MainMenu.prototype =
                     }
                 });
             }
-        });         
+        });     
+
     },
     onClickOnBtnPlay: function(){
+        this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
         this.game.scale.setMaximum();
         this.game.scale.startFullScreen(false); //true=antialiasing ON, false=antialiasing off
         game.state.start('Gameplay');

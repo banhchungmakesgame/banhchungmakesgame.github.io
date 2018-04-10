@@ -1,6 +1,8 @@
 var TH = {
     score : 0,
-    gameSparks : null
+    gameSparks : null,
+    fbAccessToken : null,
+    fbUserName : null,
 };
 
 TH.Boot = function()
