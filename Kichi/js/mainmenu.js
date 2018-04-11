@@ -127,16 +127,19 @@ TH.MainMenu.prototype =
     },
     gamesparksFacebookAuthenticate : function(tokenFB, displayName)
     {
+        TH.gameSparks.facebookConnectRequest(tokenFB, "", function(response){
+            console.log("authToken = " + response.authToken); 
+            console.log("displayName = " + response.displayName); 
+            console.log("newPlayer = " + response.newPlayer); 
+            console.log("scriptData = " + response.scriptData); 
+            console.log("switchSummary = " + response.switchSummary); 
+            console.log("userId = " + response.userId); 
+        });
         var request = new SparkRequests.FacebookConnectRequest();
         request.accessToken = tokenFB;
         request.syncDisplayName = displayName;
         var response = request.Send();
 
-        console.log("authToken = " + response.authToken); 
-        console.log("displayName = " + response.displayName); 
-        console.log("newPlayer = " + response.newPlayer); 
-        console.log("scriptData = " + response.scriptData); 
-        console.log("switchSummary = " + response.switchSummary); 
-        console.log("userId = " + response.userId); 
+        
     }
 };
