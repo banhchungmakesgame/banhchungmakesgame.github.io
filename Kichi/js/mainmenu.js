@@ -73,15 +73,15 @@ TH.MainMenu.prototype =
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
-                fbBtn.visible = false;
-                playButton.visible = true;
-                helloText.visible = true;
+                fbBtn.visible = false;                
                 FB.api(
                     '/me',
                     'GET',
                     {"fields":"id,name"},
                     function(response) {
                         console.log(response);
+                        playButton.visible = true;
+                        helloText.visible = true;
                         helloText.setText('Hello: ' + response.name);
                         TH.fbUserName = response.name;
                     }
@@ -92,13 +92,13 @@ TH.MainMenu.prototype =
                         // Logged into your app and Facebook.
                         var accessToken = response.authResponse.accessToken;
                         fbBtn.visible = false;
-                        playButton.visible = true;
-                        helloText.visible = true;
                         FB.api(
                             '/me',
                             'GET',
                             {"fields":"id,name"},
                             function(response) {
+                                playButton.visible = true;
+                                helloText.visible = true;
                                 console.log(response);
                                 helloText.setText('Hello: ' + response.name);
                                 TH.fbUserName = response.name;
