@@ -134,12 +134,6 @@ TH.MainMenu.prototype =
             console.log("scriptData = " + response.scriptData); 
             console.log("switchSummary = " + response.switchSummary); 
             console.log("userId = " + response.userId); 
-        });
-        var request = new SparkRequests.FacebookConnectRequest();
-        request.accessToken = tokenFB;
-        request.syncDisplayName = displayName;
-        var response = request.Send();
-
-        
+        });        
     }
 };
