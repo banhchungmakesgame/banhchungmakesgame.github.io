@@ -1,6 +1,5 @@
 var TH = {
     score : 0,
-    gameSparks : null,
     fbAccessToken : null,
     fbUserName : null,
 };
@@ -21,8 +20,8 @@ TH.Boot.prototype =
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         
-        TH.gameSparks = new GameSparks();
-        TH.gameSparks.initPreview({
+        gamesparks = new GameSparks();
+        gamesparks.initPreview({
             key: "o352142KYoc7",
             secret: "qfwtsFWJpDFfoePr2ddLPtu28447lcf3",
             onNonce: this.onNonce,

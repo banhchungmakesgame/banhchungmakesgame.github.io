@@ -8,3 +8,4 @@
     game.state.add('Result', TH.Result);
 
     game.state.start('Boot');
+    var gamesparks;
