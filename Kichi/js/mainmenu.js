@@ -88,20 +88,27 @@ TH.MainMenu.prototype =
                     }
                 );
             } else {
+                FB.login(function(response) {
+                if (response.status === 'connected') {
+                // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
-                fbBtn.visible = false;
-                playButton.visible = true;
-                helloText.visible = true;
-                FB.api(
-                    '/me',
-                    'GET',
-                    {"fields":"id,name"},
-                    function(response) {
-                        console.log(response);
-                        helloText.setText('Hello: ' + response.name);
-                        TH.fbUserName = response.name;
-                    }
-                );
+                    fbBtn.visible = false;
+                    playButton.visible = true;
+                    helloText.visible = true;
+                    FB.api(
+                        '/me',
+                        'GET',
+                        {"fields":"id,name"},
+                        function(response) {
+                            console.log(response);
+                            helloText.setText('Hello: ' + response.name);
+                            TH.fbUserName = response.name;
+                        }
+                    );
+                } else {
+                // The person is not logged into this app or we are unable to tell. 
+                }
+            });                
             }
         });     
 
