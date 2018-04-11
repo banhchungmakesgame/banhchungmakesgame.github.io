@@ -1,5 +1,6 @@
 var TH = {
     score : 0,
+    gameSparks : null,
     fbAccessToken : null,
     fbUserName : null,
 };
@@ -16,8 +17,12 @@ TH.Boot.prototype =
         this.input.maxPointers = 1;
         game.time.advancedTiming = true;
         this.scale.pageAlignHorizontally = true;
-        gamesparks = new GameSparks();
-        gamesparks.initPreview({
+        // Maintain aspect ratio
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        
+        TH.gameSparks = new GameSparks();
+        TH.gameSparks.initPreview({
             key: "o352142KYoc7",
             secret: "qfwtsFWJpDFfoePr2ddLPtu28447lcf3",
             onNonce: this.onNonce,
@@ -34,13 +39,11 @@ TH.Boot.prototype =
     }, 
     create: function()
     {    
-        // Maintain aspect ratio
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        
         
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
-        var title = game.add.image(game.world.centerX, 200, 'title');
+        var title = game.add.image(game.world.centerX, 450, 'title');
         title.anchor.set(0.5);
         this.state.start('Preloader');
     },

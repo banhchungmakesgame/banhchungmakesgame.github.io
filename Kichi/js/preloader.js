@@ -22,16 +22,21 @@ TH.Preloader.prototype =
         this.load.setPreloadSprite(preloaderBar);
         this.load.video('myway', 'assets/myway.mp4');
         this.load.image('play', 'assets/play.png');
-        this.load.image('gun', 'assets/gun.png');
+        this.load.image('gun', 'assets/CANON.png');
         this.load.image('bullet', 'assets/bullet.png');
-        this.load.image('ingame_bg', 'assets/ingame.jpg');
         this.load.image('item1', 'assets/item1.png');
+        this.load.image('item2', 'assets/item2.png');
+        this.load.image('item3', 'assets/item3.png');
+        this.load.image('item4', 'assets/item4.png');
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('fb_login', 'assets/fb_login.png');     
         this.load.image('rules', 'assets/rules.png');
         this.load.image('gift', 'assets/gift.png');
         this.load.image('score_bg', 'assets/score_bg.png');
         this.load.image('button', 'assets/button.png');
+        this.load.bitmapFont('spaceComics', 'fonts/SpaceComics_0.png', 'fonts/SpaceComics.xml');
+        this.load.image('ingame_bg', 'assets/ingame_bg.png');
+        this.load.image('top_bar', 'assets/top_bar');
     }, 
     create: function()
     {  

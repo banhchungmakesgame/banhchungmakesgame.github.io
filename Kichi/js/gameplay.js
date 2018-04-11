@@ -25,7 +25,7 @@ TH.Gameplay.prototype =
     }, 
     create: function()
     {      
-        var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
+        var bg = game.add.image(game.world.centerX, game.world.centerY, 'ingame_bg');
         bg.anchor.set(0.5);
         nextFire = 0;
         fireRate = 400;
@@ -69,13 +69,15 @@ TH.Gameplay.prototype =
 
         this.createEnemy();
 
+        var top_bar = game.add.image(game.world.centerX, 0, 'top_bar');
+        top_bar.anchor.set(0.5);
+        top_bar.y += top_bar.height/2;
         spacebarKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        var style = { font: "35px Tahoma", fill: "#ff0044", align: "right" };
-        text = game.add.text(game.world.width, 30, 'KICHI', style);
-        text.x -= text.width;
-        text.anchor.set(0.5);
-        var scoreStyle = { font: "35px Tahoma", fill: "#ff0044", align: "left" };
-        scoreText = game.add.text(25, 5, 'SCORE: 0', scoreStyle);
+        text = game.add.bitmapText(game.world.width, 95, 'spaceComics', 'Kichi', 108);
+        text.anchor.set(1, 0.5);
+        text.x -= 45;
+        scoreText = game.add.bitmapText(45, 95, 'spaceComics', '0', 108);
+        scoreText.anchor.set(0, 0.5);
     },
     update: function () {
         currentTimer = Math.round((timerEvent.delay - timer.ms) / 1000);
@@ -114,8 +116,9 @@ TH.Gameplay.prototype =
             var bullet = bullets.getFirstDead();
 
             bullet.reset(gun.x - 8, gun.y - 8);
+            bullet.scale.setTo(2);
 
-            game.physics.arcade.moveToXY(bullet, game.world.width, 0, 1200, 500);
+            game.physics.arcade.moveToXY(bullet, game.world.width, -50, 1200, 500);
         }
     }, 
     createEnemy: function(){
@@ -123,15 +126,35 @@ TH.Gameplay.prototype =
             var randomNo = game.rnd.integerInRange(0,1);
             var item;
             if(randomNo == 0)
+            {
                 item = items.getFirstDead();
+                var itemType = game.rnd.integerInRange(1, 4);
+                if(itemType == 1)
+                {
+                    item.loadTexture('item1');
+                }
+                else if(itemType == 2)
+                {
+                    item.loadTexture('item2');
+                }
+                else if(itemType == 3)
+                {
+                    item.loadTexture('item3');
+                }
+                else
+                {
+                    item.loadTexture('item4');
+                }
+            }                
             else
                 item = bombs.getFirstDead();
             item.reset(0, 0);
             item.anchor.set(0.5);
-            item.scale.setTo(0.325);
+            item.scale.setTo(1);
+            
             var tween = this.game.add.tween(item).to({
-            x: [0, 30, 120, 180, 300, 360, 390, 390, 360, 300, 180, 120, 300, 360, 420, 360],
-            y: [0, 50, 110, 125, 125, 150, 200, 250, 300, 325, 360, 425, 500, 550, 700, 900],
+            x: [0, 25,50,106,175,259,340,421,507,588,678,759,834,876,898,884,851,786,714,630,546,468,385,306,256,256,301,382,460,538,622,694,756,820,859,895,904,898,881,867,848],
+            y: [0, 87,160,224,268,302,316,324,330,324,330,341,369,444,525,609,676,734,776,799,810,838,863,902,969,1050,1120,1161,1192,1200,1237,1267,1329,1393,1466,1538,1622,1697,1787,1856,1904],
             }, this.getItemSpeed(),Phaser.Easing.Linear.In, true).interpolation(function(v, k){
                 return Phaser.Math.bezierInterpolation(v, k);
             });
@@ -141,7 +164,7 @@ TH.Gameplay.prototype =
     collisionHandler: function(bullet, item)
     {
         TH.score += 5;
-        scoreText.setText('SCORE: ' + TH.score);
+        scoreText.setText(TH.score);
         bullet.kill();
         game.tweens.removeFrom(item);
         item.kill();

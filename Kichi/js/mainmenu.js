@@ -31,15 +31,16 @@ TH.MainMenu.prototype =
         
     }, 
     create: function()
-    {             
+    {           
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
+        bg.scale.setTo(1, 1);
         bg.anchor.set(0.5);
-        var title = game.add.image(game.world.centerX, 200, 'title');
+        var title = game.add.image(game.world.centerX, 450, 'title');
         title.anchor.set(0.5);
 
-        fbBtn = this.add.image(game.world.centerX, game.world.centerY, 'fb_login');
+        fbBtn = this.add.image(game.world.centerX, game.world.centerY - 15, 'fb_login');
         fbBtn.anchor.set(0.5);
-        fbBtn.scale.setTo(0.5, 0.5);
+        fbBtn.scale.setTo(1, 1);
         fbBtn.inputEnabled = true;
         fbBtn.events.onInputDown.add(this.onClickOnBtnFB, this);
 
@@ -55,15 +56,15 @@ TH.MainMenu.prototype =
         helloText.anchor.set(0.5);
         helloText.visible = false;
 
-        var rulesBtn = this.add.image(game.world.centerX + 75, game.world.height - 100, 'rules');
+        var rulesBtn = this.add.image(game.world.centerX + 350, game.world.height - 95, 'rules');
         rulesBtn.anchor.set(0.5);
-        rulesBtn.scale.setTo(0.5, 0.5);
+        rulesBtn.scale.setTo(1, 1);
         rulesBtn.inputEnabled = true;
         rulesBtn.events.onInputDown.add(this.onClickOnBtnRules, this);
 
-        var giftBtn = this.add.image(game.world.centerX - 75, game.world.height - 100, 'gift');
+        var giftBtn = this.add.image(game.world.centerX - 350, game.world.height - 95, 'gift');
         giftBtn.anchor.set(0.5);
-        giftBtn.scale.setTo(0.5, 0.5);
+        giftBtn.scale.setTo(1, 1);
         giftBtn.inputEnabled = true;
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
     },
@@ -73,41 +74,22 @@ TH.MainMenu.prototype =
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
-                fbBtn.visible = false;                
+                fbBtn.visible = false;
+                playButton.visible = true;
+                helloText.visible = true;
                 FB.api(
                     '/me',
                     'GET',
                     {"fields":"id,name"},
                     function(response) {
                         console.log(response);
-                        playButton.visible = true;
-                        helloText.visible = true;
                         helloText.setText('Hello: ' + response.name);
                         TH.fbUserName = response.name;
                     }
                 );
             } else {
-                FB.login(function(response) {
-                    if (response.status == 'connected') {
-                        // Logged into your app and Facebook.
-                        var accessToken = response.authResponse.accessToken;
-                        fbBtn.visible = false;
-                        FB.api(
-                            '/me',
-                            'GET',
-                            {"fields":"id,name"},
-                            function(response) {
-                                playButton.visible = true;
-                                helloText.visible = true;
-                                console.log(response);
-                                helloText.setText('Hello: ' + response.name);
-                                TH.fbUserName = response.name;
-                            }
-                        );
-                    } else {
-                        // The person is not logged into this app or we are unable to tell. 
-                    }
-                });
+                var uri = encodeURI('https://zzvutienhung.gethub.io/Kichi');
+                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
             }
         });     
 
@@ -127,13 +109,16 @@ TH.MainMenu.prototype =
     },
     gamesparksFacebookAuthenticate : function(tokenFB, displayName)
     {
-        gamesparks.facebookConnectRequest(tokenFB, "", function(response){
-            console.log("authToken = " + response.authToken); 
-            console.log("displayName = " + response.displayName); 
-            console.log("newPlayer = " + response.newPlayer); 
-            console.log("scriptData = " + response.scriptData); 
-            console.log("switchSummary = " + response.switchSummary); 
-            console.log("userId = " + response.userId); 
-        });        
+        var request = new SparkRequests.FacebookConnectRequest();
+        request.accessToken = tokenFB;
+        request.syncDisplayName = displayName;
+        var response = request.Send();
+
+        console.log("authToken = " + response.authToken); 
+        console.log("displayName = " + response.displayName); 
+        console.log("newPlayer = " + response.newPlayer); 
+        console.log("scriptData = " + response.scriptData); 
+        console.log("switchSummary = " + response.switchSummary); 
+        console.log("userId = " + response.userId); 
     }
 };

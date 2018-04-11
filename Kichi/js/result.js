@@ -26,7 +26,8 @@ TH.Result.prototype =
 
         var shareOnFB = game.add.image(game.world.centerX, game.world.centerY + 30, 'button');
         shareOnFB.anchor.set(0.5);
-        var buttonStyle = { font: "25px Tahoma", fill: "#ff0044", align: "center" };
+        shareOnFB.scale.setTo(2, 2);
+        var buttonStyle = { font: "40px Tahoma", fill: "#ff0044", align: "center" };
         var shareFBText = game.add.text(game.world.centerX, 90, 'Share điểm trên FB', buttonStyle);
         shareFBText.anchor.set(0.5);
         shareFBText.x = shareOnFB.x;
@@ -34,8 +35,9 @@ TH.Result.prototype =
         shareOnFB.inputEnabled = true;
         shareOnFB.events.onInputDown.add(this.onClickShareOnFB, this);
 
-        var shareWithFriend = game.add.image(game.world.centerX, game.world.centerY + 120, 'button');
+        var shareWithFriend = game.add.image(game.world.centerX, game.world.centerY + 230, 'button');
         shareWithFriend.anchor.set(0.5);
+        shareWithFriend.scale.setTo(2, 2);
         var shareWFText = game.add.text(game.world.centerX, 90, 'Share game để chơi tiếp', buttonStyle);
         shareWFText.anchor.set(0.5);
         shareWFText.x = shareWithFriend.x;
@@ -43,8 +45,9 @@ TH.Result.prototype =
         shareWithFriend.inputEnabled = true;
         shareWithFriend.events.onInputDown.add(this.onClickShareWF, this);
 
-        var nhanqua = game.add.image(game.world.centerX, game.world.centerY + 210, 'button');
+        var nhanqua = game.add.image(game.world.centerX, game.world.centerY + 460, 'button');
         nhanqua.anchor.set(0.5);
+        nhanqua.scale.setTo(2, 2);
         var nhanquaText = game.add.text(game.world.centerX, 90, 'Nhận quà', buttonStyle);
         nhanquaText.anchor.set(0.5);
         nhanquaText.x = nhanqua.x;

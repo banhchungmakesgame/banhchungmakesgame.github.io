@@ -1,5 +1,5 @@
    
-    var game = new Phaser.Game(480, 800, Phaser.CANVAS, '');
+    var game = new Phaser.Game(1080, 1920, Phaser.CANVAS, '');
 
     game.state.add('Boot', TH.Boot);
     game.state.add('Preloader', TH.Preloader);
@@ -8,5 +8,3 @@
     game.state.add('Result', TH.Result);
 
     game.state.start('Boot');
-
-    var gamesparks;
