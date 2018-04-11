@@ -88,8 +88,20 @@ TH.MainMenu.prototype =
                     }
                 );
             } else {
-                var uri = encodeURI('https://zzvutienhung.github.io/Kichi');
-                window.location = encodeURI("https://www.facebook.com/v2.12/dialog/oauth?client_id=158000174877255&redirect_uri=https://zzvutienhung.github.io/Kichi");
+                TH.fbAccessToken = response.authResponse.accessToken;
+                fbBtn.visible = false;
+                playButton.visible = true;
+                helloText.visible = true;
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"id,name"},
+                    function(response) {
+                        console.log(response);
+                        helloText.setText('Hello: ' + response.name);
+                        TH.fbUserName = response.name;
+                    }
+                );
             }
         });     
 
