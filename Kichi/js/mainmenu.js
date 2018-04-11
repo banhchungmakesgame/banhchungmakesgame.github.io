@@ -89,7 +89,7 @@ TH.MainMenu.prototype =
                 );
             } else {
                 var uri = encodeURI('https://zzvutienhung.gethub.io/Kichi');
-                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
+                top.location.href = "https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri=https://zzvutienhung.gethub.io/Kichi&response_type=token";
             }
         });     
 
