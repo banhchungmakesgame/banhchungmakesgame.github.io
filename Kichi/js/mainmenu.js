@@ -127,7 +127,7 @@ TH.MainMenu.prototype =
     },
     gamesparksFacebookAuthenticate : function(tokenFB, displayName)
     {
-        TH.gameSparks.facebookConnectRequest(tokenFB, "", function(response){
+        gamesparks.facebookConnectRequest(tokenFB, "", function(response){
             console.log("authToken = " + response.authToken); 
             console.log("displayName = " + response.displayName); 
             console.log("newPlayer = " + response.newPlayer); 

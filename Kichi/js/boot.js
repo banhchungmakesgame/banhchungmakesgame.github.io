@@ -1,6 +1,5 @@
 var TH = {
     score : 0,
-    gameSparks : null,
     fbAccessToken : null,
     fbUserName : null,
 };
@@ -17,8 +16,8 @@ TH.Boot.prototype =
         this.input.maxPointers = 1;
         game.time.advancedTiming = true;
         this.scale.pageAlignHorizontally = true;
-        TH.gameSparks = new GameSparks();
-        TH.gameSparks.initPreview({
+        gamesparks = new GameSparks();
+        gamesparks.initPreview({
             key: "o352142KYoc7",
             secret: "qfwtsFWJpDFfoePr2ddLPtu28447lcf3",
             onNonce: this.onNonce,
