@@ -36,7 +36,7 @@ TH.Preloader.prototype =
         this.load.image('button', 'assets/button.png');
         this.load.bitmapFont('spaceComics', 'fonts/SpaceComics_0.png', 'fonts/SpaceComics.xml');
         this.load.image('ingame_bg', 'assets/ingame_bg.png');
-        this.load.image('top_bar', 'assets/top_bar');
+        this.load.image('top_bar', 'assets/top_bar.png');
     }, 
     create: function()
     {  
