@@ -16,7 +16,7 @@ TH.Preloader.prototype =
         var title = game.add.image(game.world.centerX, 450, 'title');
         title.anchor.set(0.5);
         var preloaderBar = this.add.sprite(game.world.centerX, game.world.centerY, 'preloaderBar');
-        preloaderBar.scale.setTo(0.75, 0.75);
+        preloaderBar.scale.setTo(1, 1);
         preloaderBar.anchor.set(0, 0.5);
         preloaderBar.x = game.world.centerX - preloaderBar.width / 2;
         this.load.setPreloadSprite(preloaderBar);
