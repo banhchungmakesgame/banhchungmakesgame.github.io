@@ -13,6 +13,7 @@ var scoreText;
 var itemSpawnSpeed = 1000;
 var currentTimer;
 var bombs;
+var live1, live2, live3;
 TH.Gameplay.prototype = 
 {
     init: function()
@@ -72,6 +73,19 @@ TH.Gameplay.prototype =
         var top_bar = game.add.image(game.world.centerX, 0, 'top_bar');
         top_bar.anchor.set(0.5);
         top_bar.y += top_bar.height/2;
+
+        live1 = game.add.image(game.world.centerX, 95, 'live');
+        live1.anchor.set(0.5);
+        live1.scale.setTo(0.3, 0.3);
+        live1.x -= (live1.width/2 + 35);
+        live2 = game.add.image(game.world.centerX, 95, 'live');
+        live2.anchor.set(0.5);
+        live2.scale.setTo(0.3, 0.3);
+        live3 = game.add.image(game.world.centerX, 95, 'live');
+        live3.anchor.set(0.5);
+        live3.scale.setTo(0.3, 0.3);
+        live3.x += (live3.width/2 + 35);        
+
         spacebarKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         text = game.add.bitmapText(game.world.width, 95, 'spaceComics', 'Kichi', 108);
         text.anchor.set(1, 0.5);
@@ -145,19 +159,41 @@ TH.Gameplay.prototype =
                 {
                     item.loadTexture('item4');
                 }
+                item.name = 'item';
             }                
             else
+            {
                 item = bombs.getFirstDead();
+                item.name = 'bomb';
+            }                
+
             item.reset(0, 0);
             item.anchor.set(0.5);
             item.scale.setTo(1);
             
+            console.log('speed: ' + this.getItemSpeed());
             var tween = this.game.add.tween(item).to({
-            x: [0, 25,50,106,175,259,340,421,507,588,678,759,834,876,898,884,851,786,714,630,546,468,385,306,256,256,301,382,460,538,622,694,756,820,859,895,904,898,881,867,848],
-            y: [0, 87,160,224,268,302,316,324,330,324,330,341,369,444,525,609,676,734,776,799,810,838,863,902,969,1050,1120,1161,1192,1200,1237,1267,1329,1393,1466,1538,1622,1697,1787,1856,1904],
+            x: [0, 25,50,106,175,259,340,421,507,588,678,759,834,876,898,884,851,786,714,630,546,468,385,306,256,256,301,382,460,538,622,694,756,820,859,895,904,898,881,867,848, 848],
+            y: [0, 87,160,224,268,302,316,324,330,324,330,341,369,444,525,609,676,734,776,799,810,838,863,902,969,1050,1120,1161,1192,1200,1237,1267,1329,1393,1466,1538,1622,1697,1787,1856,1904, 2050],
             }, this.getItemSpeed(),Phaser.Easing.Linear.In, true).interpolation(function(v, k){
                 return Phaser.Math.bezierInterpolation(v, k);
             });
+            tween.onComplete.add(function() {
+                item.kill();
+                if(item.name == 'item')
+                {
+                    TH.live -= 1;
+                    if(TH.live === 2)
+                        live3.visible = false;
+                    else if(TH.live === 1)
+                        live2.visible = false;
+                    else if(TH.live <= 0)
+                    {
+                        live1.visible = false;    
+                        game.state.start('Result');        
+                    }
+                }                
+            }, this);
             this.game.time.events.add(this.getItemSpawnTime(), this.createEnemy, this);
        }
     },
@@ -170,7 +206,7 @@ TH.Gameplay.prototype =
         item.kill();
     },
     bombCollisionHandler: function(bullet, item)
-    {
+    {   
         bullet.kill();
         game.tweens.removeFrom(item);
         item.kill();
@@ -217,55 +253,55 @@ TH.Gameplay.prototype =
         {
             return 400;
         }
-        else
+        else if(currentTimer <= 20)
         {
             return 350;
         }
+        else
+        {
+            return 700;
+        }
     },
     getItemSpeed: function(){
-        if(currentTimer > 85)
+        if(currentTimer > 80)
         {
             return 3000;
         }
-        if(currentTimer <= 85 && currentTimer > 80)
+        else if(currentTimer <= 80 && currentTimer > 70)
         {
             return 2800;
         }
-        else if(currentTimer <= 80 && currentTimer > 75)
+        else if(currentTimer <= 70 && currentTimer > 60)
         {
             return 2600;
         }
-        else if(currentTimer <= 75 && currentTimer > 70)
+        else if(currentTimer <= 60 && currentTimer > 50)
         {
             return 2400;
         }
-        else if(currentTimer <= 70 && currentTimer > 65)
+        else if(currentTimer <= 50 && currentTimer > 40)
         {
             return 2200;
         }
-        else if(currentTimer <= 65 && currentTimer > 60)
+        else if(currentTimer <= 40 && currentTimer > 30)
         {
             return 2000;
         }
-        else if(currentTimer <= 60 && currentTimer > 55)
+        else if(currentTimer <= 30 && currentTimer > 20)
         {
             return 1900;
         }
-        else if(currentTimer <= 55 && currentTimer > 50)
+        else if(currentTimer <= 20 && currentTimer > 10)
         {
             return 1800;
         }
-        else if(currentTimer <= 50 && currentTimer > 40)
+        else if(currentTimer <= 5)
         {
             return 1700;
         }
-        else if(currentTimer <= 40 && currentTimer > 20)
-        {
-            return 1600;
-        }
         else
         {
-            return 1500;
+            return 3000;
         }
     }
 };

@@ -1,5 +1,6 @@
 var TH = {
     score : 0,
+    live: 3,
     fbAccessToken : null,
     fbUserName : null,
 };
