@@ -75,10 +75,12 @@ TH.Result.prototype =
     },
     onClickNhanQua: function()
     {
-        gamesparks.logEventRequest({
-            eventKey: "KICHI_HIGHSCORE_LB",
-            HIGHSCORE: TH.score
-        })
+        var request = {};
+        request["eventKey"] = "KICHI_HIGHSCORE_LB";
+        request["HIGHSCORE"] = TH.score
+        gamesparks.sendWithData("LogEventRequest", request, function(response){
+            console.log('response ' + response);
+        });
     }
 };
 
