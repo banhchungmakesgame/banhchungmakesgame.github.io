@@ -14,6 +14,7 @@ var itemSpawnSpeed = 1000;
 var currentTimer;
 var bombs;
 var live1, live2, live3;
+var effects;
 TH.Gameplay.prototype = 
 {
     init: function()
@@ -146,20 +147,23 @@ TH.Gameplay.prototype =
                 if(itemType == 1)
                 {
                     item.loadTexture('item1');
+                    item.name = 'item1';
                 }
                 else if(itemType == 2)
                 {
                     item.loadTexture('item2');
+                    item.name = 'item2';
                 }
                 else if(itemType == 3)
                 {
                     item.loadTexture('item3');
+                    item.name = 'item3';
                 }
                 else
                 {
                     item.loadTexture('item4');
-                }
-                item.name = 'item';
+                    item.name = 'item4';
+                }                
             }                
             else
             {
@@ -180,7 +184,7 @@ TH.Gameplay.prototype =
             });
             tween.onComplete.add(function() {
                 item.kill();
-                if(item.name == 'item')
+                if(item.name.startsWith('item'))
                 {
                     TH.live -= 1;
                     if(TH.live === 2)
@@ -199,11 +203,21 @@ TH.Gameplay.prototype =
     },
     collisionHandler: function(bullet, item)
     {
-        TH.score += 5;
-        scoreText.setText(TH.score);
-        bullet.kill();
-        game.tweens.removeFrom(item);
-        item.kill();
+        if(item.name.startsWith('item'))
+        {
+            var sprite = game.add.sprite(item.centerX, item.centerY, 'fire');
+            sprite.scale.setTo(2, 2);
+            sprite.anchor.set(0.5);
+            var anim = sprite.animations.add('explosion');
+            sprite.animations.play('explosion', 24, false);
+            anim.killOnComplete = true;
+
+            TH.score += 5;
+            scoreText.setText(TH.score);
+            bullet.kill();
+            item.loadTexture(item.name + '_open');
+            item.name = 'collected';
+        }        
     },
     bombCollisionHandler: function(bullet, item)
     {   

@@ -28,6 +28,11 @@ TH.Preloader.prototype =
         this.load.image('item2', 'assets/item2.png');
         this.load.image('item3', 'assets/item3.png');
         this.load.image('item4', 'assets/item4.png');
+
+        this.load.image('item1_open', 'assets/item1_open.png');
+        this.load.image('item2_open', 'assets/item2_open.png');
+        this.load.image('item3_open', 'assets/item3_open.png');
+        this.load.image('item4_open', 'assets/item4_open.png');
         this.load.image('bomb', 'assets/bomb.png');
         this.load.image('fb_login', 'assets/fb_login.png');     
         this.load.image('rules', 'assets/rules.png');
@@ -38,6 +43,7 @@ TH.Preloader.prototype =
         this.load.image('ingame_bg', 'assets/ingame_bg.png');
         this.load.image('top_bar', 'assets/top_bar.png');
         this.load.image('live', 'assets/live.png');
+        this.load.spritesheet('fire', 'assets/fire.png', 192, 192, 20);
     }, 
     create: function()
     {  

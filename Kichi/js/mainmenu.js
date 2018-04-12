@@ -116,14 +116,15 @@ TH.MainMenu.prototype =
     onClickOnBtnPlay: function(){
         this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
         this.game.scale.setMaximum();
-        this.game.scale.startFullScreen(false); //true=antialiasing ON, false=antialiasing off
+        this.game.scale.startFullScreen(false);
+        TH.score = 0;
+        TH.isPlayAgain = false;
         game.state.start('Gameplay');
     },
     onClickOnBtnRules: function(){
         
     },
-    onClickOnBtnGift: function(){
-        this.game.scale.setMaximum();
+    onClickOnBtnGift: function(){        
         this.game.scale.startFullScreen(false);
     },
     gamesparksFacebookAuthenticate : function(tokenFB, displayName)

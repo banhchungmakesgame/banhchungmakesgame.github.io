@@ -70,8 +70,7 @@ TH.Result.prototype =
             href: 'https://zzvutienhung.github.io/Kichi/',
             display: 'popup'
           }, function(response){
-                console.log(response);
-                game.state.start('MainMenu');
+                game.state.start('Gameplay');
           });
     },
     onClickNhanQua: function()

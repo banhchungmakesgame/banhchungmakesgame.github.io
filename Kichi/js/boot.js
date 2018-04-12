@@ -1,6 +1,7 @@
 var TH = {
     score : 0,
     live: 3,
+    isPlayAgain: false,
     fbAccessToken : null,
     fbUserName : null,
 };
@@ -20,6 +21,7 @@ TH.Boot.prototype =
         // Maintain aspect ratio
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.setMaximum();
         
         gamesparks = new GameSparks();
         gamesparks.initPreview({
