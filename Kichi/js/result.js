@@ -76,8 +76,8 @@ TH.Result.prototype =
     onClickNhanQua: function()
     {
         gamesparks.logEventRequest({
-            eventKey: "KICHI_SUBMIT_SCORE",
-            SCORE: TH.score
+            eventKey: "KICHI_HIGHSCORE_LB",
+            HIGHSCORE: TH.score
         })
     }
 };
