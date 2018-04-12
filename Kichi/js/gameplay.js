@@ -91,7 +91,7 @@ TH.Gameplay.prototype =
         text = game.add.bitmapText(game.world.width, 95, 'spaceComics', 'Kichi', 108);
         text.anchor.set(1, 0.5);
         text.x -= 45;
-        scoreText = game.add.bitmapText(45, 95, 'spaceComics', '0', 108);
+        scoreText = game.add.bitmapText(45, 95, 'spaceComics', TH.score, 108);
         scoreText.anchor.set(0, 0.5);
     },
     update: function () {
