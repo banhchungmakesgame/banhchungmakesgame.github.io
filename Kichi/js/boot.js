@@ -41,7 +41,7 @@ TH.Boot.prototype =
     {    
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
-        var title = game.add.image(game.world.centerX, 650, 'title');
+        var title = game.add.image(game.world.centerX, 450, 'title');
         title.anchor.set(0.5);
         this.state.start('Preloader');
     },

@@ -13,7 +13,7 @@ TH.Preloader.prototype =
     {
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
-        var title = game.add.image(game.world.centerX, 200, 'title');
+        var title = game.add.image(game.world.centerX, 450, 'title');
         title.anchor.set(0.5);
         var preloaderBar = this.add.sprite(game.world.centerX, game.world.centerY, 'preloaderBar');
         preloaderBar.scale.setTo(0.75, 0.75);
