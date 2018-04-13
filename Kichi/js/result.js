@@ -14,6 +14,11 @@ TH.Result.prototype =
     }, 
     create: function()
     {      
+        var request = {};
+        request["eventKey"] = "KICHI_HIGHSCORE_LB";
+        request["HIGHSCORE"] = TH.score
+        gamesparks.sendWithData("LogEventRequest", request, function(response){});
+
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.anchor.set(0.5);
         var score_bg = game.add.image(game.world.centerX, 150, 'score_bg');

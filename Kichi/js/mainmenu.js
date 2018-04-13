@@ -125,7 +125,7 @@ TH.MainMenu.prototype =
         
     },
     onClickOnBtnGift: function(){        
-        this.game.scale.startFullScreen(false);
+        
     },
     gamesparksFacebookAuthenticate : function(tokenFB, displayName)
     {
