@@ -156,7 +156,11 @@ TH.MainMenu.prototype =
         });     
 
     },
-    onClickOnBtnPlay: function(){        
+    onClickOnBtnPlay: function(){    
+        if(!gamesparks.getAuthToken())    
+        {
+            this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
+        }
         this.game.scale.setMaximum();
         this.game.scale.startFullScreen(false);
         TH.score = 0;
@@ -188,15 +192,15 @@ TH.MainMenu.prototype =
         request["eventKey"] = "GET_LIST_GC_OF_USER";
         request["USER_ID"] = TH.userId;
         gamesparks.sendWithData("LogEventRequest", request, function(response){
-            if(response.data)
+            if(response.scriptData.data)
             {
                 for(var i=0;i<15;i++)
                 {
-                    if(response.data[i])
+                    if(response.scriptData.data[i])
                     {
                         listGcButton[i].visible = true;
                         listGcText[i].visible = true;
-                        listGcText[i].setText(response.data.giftCode);
+                        listGcText[i].setText(response.scriptData.data[i].giftCode);
                     }
                 }
             }
