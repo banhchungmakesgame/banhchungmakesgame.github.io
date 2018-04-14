@@ -196,7 +196,7 @@ TH.Result.prototype =
         var request = {};
         request["eventKey"] = "REQUEST_GIFT_CODE";
         request["SCORE"] = TH.score;
-        request["userId"] = TH.userId;
+        request["USER_ID"] = TH.userId;
         gamesparks.sendWithData("LogEventRequest", request, function(response){
             //show get code popup
             giftCodePopup.visible = false;
@@ -205,7 +205,7 @@ TH.Result.prototype =
             btnChoiLai.visible = false;
             btnKhampha.visible = false;
             console.log(JSON.stringify(response));
-            giftCodeText.setText(response.scriptData.data.code);
+            giftCodeText.setText(response.data.code);
         });
     },
     onClickBtnChoiLai: function()
