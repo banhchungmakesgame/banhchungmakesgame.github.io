@@ -123,7 +123,7 @@ TH.MainMenu.prototype =
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
-                TH.MainMenu.fbBtn.visible = false;
+                fbBtn.visible = false;
                 TH.MainMenu.playButton.visible = true;
                 FB.api(
                     '/me',
