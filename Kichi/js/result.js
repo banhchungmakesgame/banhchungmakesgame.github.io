@@ -5,6 +5,9 @@ TH.Result = function(){
 };
 var avatar1, avatar2, avatar3;
 var highscore1, highscore2, highscore3;
+var giftCodePopup, giftCodeText;
+var dieukhoan, congratText;
+var btnKhampha, btnChoiLai;
 TH.Result.prototype = 
 {
     init: function()
@@ -97,7 +100,7 @@ TH.Result.prototype =
         highscore3.tint = 0x085282;
 
         gamesparks.leaderboardDataRequest(null, 3, null, "KICHI_LB", 0, null, function(response){
-            if(response.data.length > 0)
+            if(response && response.data && response.data.length > 0)
             {
                 if(response.data[0])
                 {
@@ -142,6 +145,32 @@ TH.Result.prototype =
                 }
             }
         });
+
+        giftCodePopup = game.add.image(game.world.centerX, game.world.centerY, 'top_bar');
+        giftCodePopup.anchor.set(0.5);
+        giftCodePopup.scale.setTo(0.9, 9);
+        
+        congratText = game.add.text(0, 0, 'Chúc mừng\nbạn đã nhận được giftcode:', {font: 'Tahoma', fontSize: 70 });
+        congratText.anchor.set(0.5);
+        congratText.x = game.world.centerX;
+        congratText.y = game.world.centerY - ((giftCodePopup.height/2) - 200);
+        giftCodeText = game.add.text(0, 0, '', {font: 'Tahoma', fontSize: 108 });
+        giftCodeText.anchor.set(0.5);
+        giftCodeText.x = game.world.centerX;
+        giftCodeText.y = giftCodePopup.y;
+        btnChoiLai = game.add.image(game.world.centerX - 200, game.world.centerY + (giftCodePopup.height/2 - 150), 'play_again');
+        btnChoiLai.anchor.set(0.5);
+        btnKhampha = game.add.image(game.world.centerX + 200, game.world.centerY + (giftCodePopup.height/2 - 150), 'khampha_uudai');
+        btnKhampha.anchor.set(0.5);
+        btnChoiLai.events.onInputDown.add(this.onClickBtnChoiLai, this);
+        btnKhampha.events.onInputDown.add(this.onClickBtnKhamPhaUuDai, this);
+        giftCodePopup.visible = false;
+        congratText.visible = false;
+        giftCodeText.visible = false;
+        btnChoiLai.visible = false;
+        btnKhampha.visible = false;
+        btnChoiLai.inputEnabled = true;
+        btnKhampha.inputEnabled = true;
     },
     onClickShareOnFB: function()
     {
@@ -165,11 +194,29 @@ TH.Result.prototype =
     onClickNhanQua: function()
     {
         var request = {};
-        request["eventKey"] = "KICHI_HIGHSCORE_LB";
-        request["HIGHSCORE"] = TH.score
+        request["eventKey"] = "REQUEST_GIFT_CODE";
+        request["SCORE"] = TH.score;
+        request["userId"] = TH.userId;
         gamesparks.sendWithData("LogEventRequest", request, function(response){
-            console.log('response ' + response);
+            //show get code popup
+            giftCodePopup.visible = false;
+            congratText.visible = false;
+            giftCodeText.visible = false;
+            btnChoiLai.visible = false;
+            btnKhampha.visible = false;
+            giftCodeText.setText(response.data.code);
         });
+    },
+    onClickBtnChoiLai: function()
+    {
+        TH.score = 0;
+        TH.isPlayAgain = false;
+        TH.isGameOver = false;
+        game.state.start('Gameplay');
+    },
+    onClickBtnKhamPhaUuDai: function()
+    {
+        window.open("http://www.google.com", "_blank");
     }
 };
 

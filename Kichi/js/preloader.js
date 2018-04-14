@@ -56,6 +56,8 @@ TH.Preloader.prototype =
         this.load.image('sound_off', 'assets/sound_off.png');
         this.load.image('sound_on', 'assets/sound_on.png');
         this.load.image('result_bg', 'assets/result_bg.png');
+        this.load.image('play_again', 'assets/play_again.png');
+        this.load.image('khampha_uudai', 'assets/khampha_uudai.png');
     }, 
     create: function()
     {  

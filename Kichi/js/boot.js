@@ -5,6 +5,7 @@ var TH = {
     isPlayAgain: false,
     fbAccessToken : null,
     fbUserName : null,
+    userId : ''
 };
 
 TH.Boot = function()
