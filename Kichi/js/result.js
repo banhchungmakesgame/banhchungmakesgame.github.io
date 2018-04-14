@@ -99,7 +99,7 @@ TH.Result.prototype =
         gamesparks.leaderboardDataRequest(null, 3, null, "KICHI_LB", 0, null, function(response){
             if(response.data.length > 0)
             {
-                if(response.data[1])
+                if(response.data[0])
                 {
                     highscore1.setText(response.data[1].HIGHSCORE);
                     FB.api(
@@ -115,7 +115,7 @@ TH.Result.prototype =
                         }
                     );
                 }
-                if(response.data[2])
+                if(response.data[1])
                 {
                     highscore2.setText(response.data[2].HIGHSCORE);
                     FB.api(
@@ -129,7 +129,7 @@ TH.Result.prototype =
                     );
                 }
 
-                if(response.data[3])
+                if(response.data[2])
                 {
                     highscore3.setText(response.data[3].HIGHSCORE);
                     FB.api(
