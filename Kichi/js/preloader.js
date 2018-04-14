@@ -34,16 +34,28 @@ TH.Preloader.prototype =
         this.load.image('item3_open', 'assets/item3_open.png');
         this.load.image('item4_open', 'assets/item4_open.png');
         this.load.image('bomb', 'assets/bomb.png');
+        this.load.image('bomb_open', 'assets/bomb_open.png');
         this.load.image('fb_login', 'assets/fb_login.png');     
         this.load.image('rules', 'assets/rules.png');
         this.load.image('gift', 'assets/gift.png');
         this.load.image('score_bg', 'assets/score_bg.png');
-        this.load.image('button', 'assets/button.png');
+        this.load.bitmapFont('marvin', 'fonts/Marvin/Marvin_0.png', 'fonts/Marvin/Marvin.xml');
         this.load.bitmapFont('spaceComics', 'fonts/SpaceComics_0.png', 'fonts/SpaceComics.xml');
         this.load.image('ingame_bg', 'assets/ingame_bg.png');
         this.load.image('top_bar', 'assets/top_bar.png');
         this.load.image('live', 'assets/live.png');
-        this.load.spritesheet('fire', 'assets/fire.png', 192, 192, 20);
+        this.load.spritesheet('fire', 'assets/fire.png', 256, 256, 5);
+
+        this.load.image('avatar', 'assets/avatar.png');
+        this.load.image('congrat', 'assets/congrat.png');
+        this.load.image('footer', 'assets/footer.png');
+        this.load.image('get_code', 'assets/get_code.png');
+        this.load.image('score_bg', 'assets/congrat.png');
+        this.load.image('share_score_fb', 'assets/share_score_facebook.png');
+        this.load.image('share_with_friend', 'assets/share_with_friend.png');
+        this.load.image('sound_off', 'assets/sound_off.png');
+        this.load.image('sound_on', 'assets/sound_on.png');
+        this.load.image('result_bg', 'assets/result_bg.png');
     }, 
     create: function()
     {  

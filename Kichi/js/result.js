@@ -3,7 +3,7 @@
 TH.Result = function(){
     
 };
-
+var avatar1, avatar2, avatar3;
 TH.Result.prototype = 
 {
     init: function()
@@ -19,46 +19,64 @@ TH.Result.prototype =
         request["HIGHSCORE"] = TH.score
         gamesparks.sendWithData("LogEventRequest", request, function(response){});
 
-        var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
+        var bg = game.add.image(game.world.centerX, game.world.centerY, 'result_bg');
         bg.anchor.set(0.5);
-        var score_bg = game.add.image(game.world.centerX, 150, 'score_bg');
+        var congrat = game.add.image(game.world.centerX, 230, 'congrat');
+        congrat.anchor.set(0.5);
+        var score_bg = game.add.image(game.world.centerX, 520, 'score_bg');
         score_bg.anchor.set(0.5);
-        var style = { font: "85px Tahoma", fill: "#ffffff", align: "center" };
-        var scoreText = game.add.text(game.world.centerX, 150, TH.score, style);
+        var scoreText = game.add.bitmapText(game.world.centerX, 50, 'marvin', 21000, 350);
         scoreText.anchor.set(0.5);
         scoreText.x = score_bg.x;
-        scoreText.y = score_bg.y;
+        scoreText.y = score_bg.y-50;
 
-        var shareOnFB = game.add.image(game.world.centerX, game.world.centerY + 30, 'button');
-        shareOnFB.anchor.set(0.5);
-        shareOnFB.scale.setTo(2, 2);
-        var buttonStyle = { font: "40px Tahoma", fill: "#ff0044", align: "center" };
-        var shareFBText = game.add.text(game.world.centerX, 90, 'Share điểm trên FB', buttonStyle);
-        shareFBText.anchor.set(0.5);
-        shareFBText.x = shareOnFB.x;
-        shareFBText.y = shareOnFB.y;
-        shareOnFB.inputEnabled = true;
-        shareOnFB.events.onInputDown.add(this.onClickShareOnFB, this);
+        if(!TH.isPlayAgain)
+        {
+            var shareWithFriend = game.add.image(game.world.centerX, game.world.centerY - 50, 'share_with_friend');
+            shareWithFriend.anchor.set(0.5);
+            shareWithFriend.inputEnabled = true;
+            shareWithFriend.events.onInputDown.add(this.onClickShareWF, this);
 
-        var shareWithFriend = game.add.image(game.world.centerX, game.world.centerY + 230, 'button');
-        shareWithFriend.anchor.set(0.5);
-        shareWithFriend.scale.setTo(2, 2);
-        var shareWFText = game.add.text(game.world.centerX, 90, 'Share game để chơi tiếp', buttonStyle);
-        shareWFText.anchor.set(0.5);
-        shareWFText.x = shareWithFriend.x;
-        shareWFText.y = shareWithFriend.y;
-        shareWithFriend.inputEnabled = true;
-        shareWithFriend.events.onInputDown.add(this.onClickShareWF, this);
+            var shareOnFB = game.add.image(game.world.centerX, game.world.centerY + 135, 'share_score_fb');
+            shareOnFB.anchor.set(0.5);
+            shareOnFB.inputEnabled = true;
+            shareOnFB.events.onInputDown.add(this.onClickShareOnFB, this);            
 
-        var nhanqua = game.add.image(game.world.centerX, game.world.centerY + 460, 'button');
-        nhanqua.anchor.set(0.5);
-        nhanqua.scale.setTo(2, 2);
-        var nhanquaText = game.add.text(game.world.centerX, 90, 'Nhận quà', buttonStyle);
-        nhanquaText.anchor.set(0.5);
-        nhanquaText.x = nhanqua.x;
-        nhanquaText.y = nhanqua.y;
-        nhanqua.inputEnabled = true;
-        nhanqua.events.onInputDown.add(this.onClickNhanQua, this);
+            var nhanqua = game.add.image(game.world.centerX, game.world.centerY + 320, 'get_code');
+            nhanqua.anchor.set(0.5);
+            nhanqua.inputEnabled = true;
+            nhanqua.events.onInputDown.add(this.onClickNhanQua, this);
+        }
+        else
+        {
+            var shareOnFB = game.add.image(game.world.centerX, game.world.centerY, 'share_score_fb');
+            shareOnFB.anchor.set(0.5);
+            shareOnFB.inputEnabled = true;
+            shareOnFB.events.onInputDown.add(this.onClickShareOnFB, this);            
+
+            var nhanqua = game.add.image(game.world.centerX, game.world.centerY + 215, 'get_code');
+            nhanqua.anchor.set(0.5);
+            nhanqua.inputEnabled = true;
+            nhanqua.events.onInputDown.add(this.onClickNhanQua, this);
+        }
+
+        var footer = game.add.image(game.world.centerX, game.world.height, 'footer');
+        footer.anchor.set(0.5);
+        footer.y -= footer.height/2;
+        var avatar1 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar1.anchor.set(0.5);
+        avatar1.x = footer.centerX - 285;
+        avatar1.y = footer.centerY - 10;
+
+        var avatar2 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar2.anchor.set(0.5);
+        avatar2.x = footer.centerX+10;
+        avatar2.y = footer.centerY - 10;
+
+        var avatar3 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar3.anchor.set(0.5);
+        avatar3.x = footer.centerX + 295;
+        avatar3.y = footer.centerY - 10;
     },
     onClickShareOnFB: function()
     {
@@ -75,7 +93,8 @@ TH.Result.prototype =
             href: 'https://zzvutienhung.github.io/Kichi/',
             display: 'popup'
           }, function(response){
-                game.state.start('Gameplay');
+            TH.isGameOver = false;
+            game.state.start('Gameplay');
           });
     },
     onClickNhanQua: function()

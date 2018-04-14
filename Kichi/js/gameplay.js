@@ -77,14 +77,14 @@ TH.Gameplay.prototype =
 
         live1 = game.add.image(game.world.centerX, 95, 'live');
         live1.anchor.set(0.5);
-        live1.scale.setTo(0.3, 0.3);
+        live1.scale.setTo(1, 1);
         live1.x -= (live1.width/2 + 35);
         live2 = game.add.image(game.world.centerX, 95, 'live');
         live2.anchor.set(0.5);
-        live2.scale.setTo(0.3, 0.3);
+        live2.scale.setTo(1, 1);
         live3 = game.add.image(game.world.centerX, 95, 'live');
         live3.anchor.set(0.5);
-        live3.scale.setTo(0.3, 0.3);
+        live3.scale.setTo(1, 1);
         live3.x += (live3.width/2 + 35);        
 
         spacebarKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -95,6 +95,10 @@ TH.Gameplay.prototype =
         scoreText.anchor.set(0, 0.5);
     },
     update: function () {
+        if(TH.isGameOver)
+        {
+            return;
+        }
         currentTimer = Math.round((timerEvent.delay - timer.ms) / 1000);
         text.setText(this.formatTime(currentTimer));
         if (game.input.activePointer.isDown)
@@ -124,6 +128,10 @@ TH.Gameplay.prototype =
         return minutes.substr(-2) + ":" + seconds.substr(-2);   
     },
     fire: function(){
+        if(TH.isGameOver)
+        {
+            return;
+        }
         if (this.time.now > nextFire && bullets.countDead() > 0)
         {
             nextFire = this.time.now + fireRate;
@@ -131,7 +139,7 @@ TH.Gameplay.prototype =
             var bullet = bullets.getFirstDead();
 
             bullet.reset(gun.x - 8, gun.y - 8);
-            bullet.scale.setTo(2);
+            bullet.scale.setTo(1);
 
             game.physics.arcade.moveToXY(bullet, game.world.width, -50, 1200, 500);
         }
@@ -164,16 +172,17 @@ TH.Gameplay.prototype =
                     item.loadTexture('item4');
                     item.name = 'item4';
                 }                
+                item.scale.setTo(1);
             }                
             else
             {
                 item = bombs.getFirstDead();
                 item.name = 'bomb';
+                item.scale.setTo(0.75);
             }                
 
             item.reset(0, 0);
-            item.anchor.set(0.5);
-            item.scale.setTo(1);
+            item.anchor.set(0.5);            
             
             console.log('speed: ' + this.getItemSpeed());
             var tween = this.game.add.tween(item).to({
@@ -206,7 +215,7 @@ TH.Gameplay.prototype =
         if(item.name.startsWith('item'))
         {
             var sprite = game.add.sprite(item.centerX, item.centerY, 'fire');
-            sprite.scale.setTo(2, 2);
+            sprite.scale.setTo(1.75, 1.75);
             sprite.anchor.set(0.5);
             var anim = sprite.animations.add('explosion');
             sprite.animations.play('explosion', 24, false);
@@ -221,10 +230,15 @@ TH.Gameplay.prototype =
     },
     bombCollisionHandler: function(bullet, item)
     {   
+        item.loadTexture(item.name + '_open');
+        var sprite = game.add.sprite(item.centerX, item.centerY, 'fire');
+        sprite.scale.setTo(1.75, 1.75);
+        sprite.anchor.set(0.5);
+        var anim = sprite.animations.add('explosion');
+        sprite.animations.play('explosion', 24, false);
+        anim.killOnComplete = true;
         bullet.kill();
-        game.tweens.removeFrom(item);
-        item.kill();
-        game.state.start('Result');
+        this.gameOver();        
     },
     getItemSpawnTime: function(){
         if(currentTimer > 85)
@@ -317,5 +331,16 @@ TH.Gameplay.prototype =
         {
             return 3000;
         }
+    },
+    goToResult: function()
+    {
+        game.state.start('Result');
+    },
+    gameOver: function()
+    {
+        TH.isGameOver = true;
+        game.tweens.removeAll();
+        this.game.time.events.removeAll();
+        this.game.time.events.add(0, this.goToResult, this);
     }
 };

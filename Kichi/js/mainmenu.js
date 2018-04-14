@@ -119,6 +119,7 @@ TH.MainMenu.prototype =
         this.game.scale.startFullScreen(false);
         TH.score = 0;
         TH.isPlayAgain = false;
+        TH.isGameOver = false;
         game.state.start('Gameplay');
     },
     onClickOnBtnRules: function(){
