@@ -169,6 +169,11 @@ TH.MainMenu.prototype =
         
     },
     onClickOnBtnGift: function(){  
+        if(!gamesparks.getAuthToken())
+        {
+            window.alert('Bạn vui lòng đăng nhập facebook để xem giỏ quà nhé <3');
+            retturn;
+        }
         TH.MainMenu.giftCodePopup.visible = true;
         TH.MainMenu.titleGC.visible = true;
         TH.MainMenu.btnPrev.visible = true;
