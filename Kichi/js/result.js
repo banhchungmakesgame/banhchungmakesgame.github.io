@@ -199,12 +199,11 @@ TH.Result.prototype =
         request["USER_ID"] = TH.userId;
         gamesparks.sendWithData("LogEventRequest", request, function(response){
             //show get code popup
-            giftCodePopup.visible = false;
-            congratText.visible = false;
-            giftCodeText.visible = false;
-            btnChoiLai.visible = false;
-            btnKhampha.visible = false;
-            console.log(JSON.stringify(response));
+            giftCodePopup.visible = true;
+            congratText.visible = true;
+            giftCodeText.visible = true;
+            btnChoiLai.visible = true;
+            btnKhampha.visible = true;
             giftCodeText.setText(response.scriptData.data.code);
         });
     },
