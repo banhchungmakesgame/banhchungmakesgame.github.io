@@ -108,7 +108,7 @@ TH.Result.prototype =
                         {},
                         function(response) {
                             game.load.image('highscore1', response.url);
-                            highscore1.loadTexture('highscore1');
+                            avatar1.loadTexture('highscore1');
                         }
                     );
                 }
@@ -121,7 +121,7 @@ TH.Result.prototype =
                         {},
                         function(response) {
                             game.load.image('highscore2', response.url);
-                            highscore2.loadTexture('highscore2');
+                            avatar2.loadTexture('highscore2');
                         }
                     );
                 }
@@ -135,7 +135,7 @@ TH.Result.prototype =
                         {},
                         function(response) {
                             game.load.image('highscore3', response.url);
-                            highscore3.loadTexture('highscore3');
+                            avatar3.loadTexture('highscore3');
                         }
                     );
                 }
