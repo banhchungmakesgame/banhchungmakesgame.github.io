@@ -198,9 +198,9 @@ TH.MainMenu.prototype =
                 {
                     if(response.scriptData.data[i])
                     {
-                        listGcButton[i].visible = true;
-                        listGcText[i].visible = true;
-                        listGcText[i].setText(response.scriptData.data[i].giftCode);
+                        TH.MainMenu.listGcButton[i].visible = true;
+                        TH.MainMenu.listGcText[i].visible = true;
+                        TH.MainMenu.listGcText[i].setText(response.scriptData.data[i].giftCode);
                     }
                 }
             }
