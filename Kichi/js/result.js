@@ -107,10 +107,8 @@ TH.Result.prototype =
                         'GET',
                         {},
                         function(response) {
-                            var dataURI = response.url;
-                            var data = new Image();
-                            data.src = dataURI;
-                            game.cache.addImage('highscore1', dataURI, data);
+                            var loader = this.game.load.image('highscore1', response.url);
+                            loader.start();
                             avatar1.loadTexture('highscore1');
                         }
                     );
