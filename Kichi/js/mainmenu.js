@@ -32,6 +32,7 @@ TH.MainMenu.prototype =
     }, 
     create: function()
     {         
+        game.state.start('Gameplay');
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.scale.setTo(1, 1);
         bg.anchor.set(0.5);
@@ -71,7 +72,6 @@ TH.MainMenu.prototype =
                 TH.fbAccessToken = response.authResponse.accessToken;
                 fbBtn.visible = false;
                 playButton.visible = true;
-                helloText.visible = true;
                 FB.api(
                     '/me',
                     'GET',
@@ -87,7 +87,6 @@ TH.MainMenu.prototype =
                 TH.fbAccessToken = response.authResponse.accessToken;
                     fbBtn.visible = false;
                     playButton.visible = true;
-                    helloText.visible = true;
                     FB.api(
                         '/me',
                         'GET',

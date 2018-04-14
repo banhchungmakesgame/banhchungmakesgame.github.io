@@ -4,6 +4,7 @@ TH.Result = function(){
     
 };
 var avatar1, avatar2, avatar3;
+var highscore1, highscore2, highscore3;
 TH.Result.prototype = 
 {
     init: function()
@@ -13,11 +14,12 @@ TH.Result.prototype =
     {
     }, 
     create: function()
-    {      
+    {   
         var request = {};
         request["eventKey"] = "KICHI_HIGHSCORE_LB";
         request["HIGHSCORE"] = TH.score
-        gamesparks.sendWithData("LogEventRequest", request, function(response){});
+        gamesparks.sendWithData("LogEventRequest", request, function(response){            
+        });
 
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'result_bg');
         bg.anchor.set(0.5);
@@ -63,20 +65,48 @@ TH.Result.prototype =
         var footer = game.add.image(game.world.centerX, game.world.height, 'footer');
         footer.anchor.set(0.5);
         footer.y -= footer.height/2;
-        var avatar1 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar1 = game.add.image(game.world.centerX, game.world.height, 'avatar');
         avatar1.anchor.set(0.5);
         avatar1.x = footer.centerX - 285;
         avatar1.y = footer.centerY - 10;
 
-        var avatar2 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        highscore1 = game.add.bitmapText(game.world.centerX, 50, 'marvin', '', 72);
+        highscore1.anchor.set(0.5);
+        highscore1.x = avatar1.x;
+        highscore1.y = avatar1.y+125;
+        highscore1.tint = 0x085282;
+
+        avatar2 = game.add.image(game.world.centerX, game.world.height, 'avatar');
         avatar2.anchor.set(0.5);
         avatar2.x = footer.centerX+10;
         avatar2.y = footer.centerY - 10;
+        highscore2 = game.add.bitmapText(game.world.centerX, 50, 'marvin', '', 72);
+        highscore2.anchor.set(0.5);
+        highscore2.x = avatar2.x;
+        highscore2.y = avatar2.y+125;
+        highscore2.tint = 0x085282;
 
-        var avatar3 = game.add.image(game.world.centerX, game.world.height, 'avatar');
+        avatar3 = game.add.image(game.world.centerX, game.world.height, 'avatar');
         avatar3.anchor.set(0.5);
         avatar3.x = footer.centerX + 295;
-        avatar3.y = footer.centerY - 10;
+        avatar3.y = footer.centerY - 10;  
+        highscore3 = game.add.bitmapText(game.world.centerX, 50, 'marvin', '', 72);
+        highscore3.anchor.set(0.5);
+        highscore3.x = avatar3.x;
+        highscore3.y = avatar3.y+125;      
+        highscore3.tint = 0x085282;
+
+        gamesparks.leaderboardDataRequest(null, 3, null, "KICHI_LB", 0, null, function(response){
+            if(response.data.length > 0)
+            {
+                for(var i=0;i<response.data.length;i++)
+                {
+                    console.log(response.data[i].userName);
+                    console.log(response.data[i].HIGHSCORE);
+                    console.log(response.data[i].externalIds.FB);
+                }
+            }
+        });
     },
     onClickShareOnFB: function()
     {

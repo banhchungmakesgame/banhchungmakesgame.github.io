@@ -75,17 +75,17 @@ TH.Gameplay.prototype =
         top_bar.anchor.set(0.5);
         top_bar.y += top_bar.height/2;
 
-        live1 = game.add.image(game.world.centerX, 95, 'live');
+        live1 = game.add.image(game.world.centerX-30, 95, 'live');
         live1.anchor.set(0.5);
         live1.scale.setTo(1, 1);
-        live1.x -= (live1.width/2 + 35);
-        live2 = game.add.image(game.world.centerX, 95, 'live');
+        live1.x -= (live1.width/2 + 55);
+        live2 = game.add.image(game.world.centerX-30, 95, 'live');
         live2.anchor.set(0.5);
         live2.scale.setTo(1, 1);
-        live3 = game.add.image(game.world.centerX, 95, 'live');
+        live3 = game.add.image(game.world.centerX-30, 95, 'live');
         live3.anchor.set(0.5);
         live3.scale.setTo(1, 1);
-        live3.x += (live3.width/2 + 35);        
+        live3.x += (live3.width/2 + 55);        
 
         spacebarKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         text = game.add.bitmapText(game.world.width, 95, 'spaceComics', 'Kichi', 108);
@@ -184,7 +184,6 @@ TH.Gameplay.prototype =
             item.reset(0, 0);
             item.anchor.set(0.5);            
             
-            console.log('speed: ' + this.getItemSpeed());
             var tween = this.game.add.tween(item).to({
             x: [0, 25,50,106,175,259,340,421,507,588,678,759,834,876,898,884,851,786,714,630,546,468,385,306,256,256,301,382,460,538,622,694,756,820,859,895,904,898,881,867,848, 848],
             y: [0, 87,160,224,268,302,316,324,330,324,330,341,369,444,525,609,676,734,776,799,810,838,863,902,969,1050,1120,1161,1192,1200,1237,1267,1329,1393,1466,1538,1622,1697,1787,1856,1904, 2050],
