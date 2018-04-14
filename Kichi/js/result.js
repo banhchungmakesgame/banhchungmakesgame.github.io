@@ -205,7 +205,7 @@ TH.Result.prototype =
             btnChoiLai.visible = false;
             btnKhampha.visible = false;
             console.log(JSON.stringify(response));
-            giftCodeText.setText(response.data.code);
+            giftCodeText.setText(response.scriptData.data.code);
         });
     },
     onClickBtnChoiLai: function()
