@@ -189,6 +189,7 @@ TH.Result.prototype =
             display: 'popup'
           }, function(response){
             TH.isGameOver = false;
+            TH.isPlayAgain = true;
             game.state.start('Gameplay');
           });
     },
@@ -213,7 +214,7 @@ TH.Result.prototype =
         TH.score = 0;
         TH.isPlayAgain = false;
         TH.isGameOver = false;
-        game.state.start('Gameplay');
+        game.state.start('MainMenu');
     },
     onClickBtnKhamPhaUuDai: function()
     {
