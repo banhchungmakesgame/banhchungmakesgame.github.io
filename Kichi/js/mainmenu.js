@@ -51,11 +51,6 @@ TH.MainMenu.prototype =
         playButton.events.onInputDown.add(this.onClickOnBtnPlay, this);
         playButton.visible = false;
 
-        var style = { font: "30px Tahoma", fill: "#00d20a", align: "center" };
-        helloText = game.add.text(game.world.centerX, game.world.centerY + 100, 'Hello: ', style);
-        helloText.anchor.set(0.5);
-        helloText.visible = false;
-
         var rulesBtn = this.add.image(game.world.centerX + 350, game.world.height - 95, 'rules');
         rulesBtn.anchor.set(0.5);
         rulesBtn.scale.setTo(1, 1);
@@ -82,8 +77,6 @@ TH.MainMenu.prototype =
                     'GET',
                     {"fields":"id,name"},
                     function(response) {
-                        console.log(response);
-                        helloText.setText('Hello: ' + response.name);
                         TH.fbUserName = response.name;
                     }
                 );
@@ -101,7 +94,6 @@ TH.MainMenu.prototype =
                         {"fields":"id,name"},
                         function(response) {
                             console.log(response);
-                            helloText.setText('Hello: ' + response.name);
                             TH.fbUserName = response.name;
                         }
                     );

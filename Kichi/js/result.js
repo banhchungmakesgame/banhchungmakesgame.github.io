@@ -25,7 +25,7 @@ TH.Result.prototype =
         congrat.anchor.set(0.5);
         var score_bg = game.add.image(game.world.centerX, 520, 'score_bg');
         score_bg.anchor.set(0.5);
-        var scoreText = game.add.bitmapText(game.world.centerX, 50, 'marvin', 21000, 350);
+        var scoreText = game.add.bitmapText(game.world.centerX, 50, 'marvin', TH.score, 350);
         scoreText.anchor.set(0.5);
         scoreText.x = score_bg.x;
         scoreText.y = score_bg.y-50;
