@@ -16,6 +16,7 @@ TH.Boot.prototype =
 {
     init: function()
     {
+        game.load.crossOrigin = 'anonymous';
         this.input.maxPointers = 1;
         game.time.advancedTiming = true;
         this.scale.pageAlignHorizontally = true;
