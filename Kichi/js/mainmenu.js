@@ -125,6 +125,7 @@ TH.MainMenu.prototype =
                 TH.fbAccessToken = response.authResponse.accessToken;
                 TH.MainMenu.fbBtn.visible = false;
                 TH.MainMenu.playButton.visible = true;
+                this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
                 FB.api(
                     '/me',
                     'GET',
@@ -136,8 +137,9 @@ TH.MainMenu.prototype =
             } else {
                 FB.login(function(response) {
                 if (response.status === 'connected') {
-                // Logged into your app and Facebook.
-                TH.fbAccessToken = response.authResponse.accessToken;
+                    // Logged into your app and Facebook.
+                    TH.fbAccessToken = response.authResponse.accessToken;
+                    this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
                     fbBtn.visible = false;
                     TH.MainMenu.playButton.visible = true;
                     FB.api(
@@ -156,8 +158,7 @@ TH.MainMenu.prototype =
         });     
 
     },
-    onClickOnBtnPlay: function(){
-        this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
+    onClickOnBtnPlay: function(){        
         this.game.scale.setMaximum();
         this.game.scale.startFullScreen(false);
         TH.score = 0;
@@ -172,7 +173,7 @@ TH.MainMenu.prototype =
         if(!gamesparks.getAuthToken())
         {
             window.alert('Bạn vui lòng đăng nhập facebook để xem giỏ quà nhé <3');
-            retturn;
+            return;
         }
         TH.MainMenu.giftCodePopup.visible = true;
         TH.MainMenu.titleGC.visible = true;
