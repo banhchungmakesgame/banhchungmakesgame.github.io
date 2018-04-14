@@ -101,9 +101,9 @@ TH.Result.prototype =
             {
                 if(response.data[0])
                 {
-                    highscore1.setText(response.data[1].HIGHSCORE);
+                    highscore1.setText(response.data[0].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[1].externalIds.FB + '/picture',
+                        '/'+ response.data[0].externalIds.FB + '/picture',
                         'GET',
                         {},
                         function(response) {
@@ -117,9 +117,9 @@ TH.Result.prototype =
                 }
                 if(response.data[1])
                 {
-                    highscore2.setText(response.data[2].HIGHSCORE);
+                    highscore2.setText(response.data[1].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[2].externalIds.FB + '/picture',
+                        '/'+ response.data[1].externalIds.FB + '/picture',
                         'GET',
                         {},
                         function(response) {
@@ -131,9 +131,9 @@ TH.Result.prototype =
 
                 if(response.data[2])
                 {
-                    highscore3.setText(response.data[3].HIGHSCORE);
+                    highscore3.setText(response.data[2].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[3].externalIds.FB + '/picture',
+                        '/'+ response.data[2].externalIds.FB + '/picture',
                         'GET',
                         {},
                         function(response) {
