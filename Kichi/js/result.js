@@ -99,11 +99,45 @@ TH.Result.prototype =
         gamesparks.leaderboardDataRequest(null, 3, null, "KICHI_LB", 0, null, function(response){
             if(response.data.length > 0)
             {
-                for(var i=0;i<response.data.length;i++)
+                if(response.data[1])
                 {
-                    console.log(response.data[i].userName);
-                    console.log(response.data[i].HIGHSCORE);
-                    console.log(response.data[i].externalIds.FB);
+                    highscore1.setText(response.data[1].HIGHSCORE);
+                    FB.api(
+                        '/'+ response.data[1].externalIds.FB + '/picture',
+                        'GET',
+                        {},
+                        function(response) {
+                            game.load.image('highscore1', response.url);
+                            highscore1.loadTexture('highscore1');
+                        }
+                    );
+                }
+                if(response.data[2])
+                {
+                    highscore2.setText(response.data[2].HIGHSCORE);
+                    FB.api(
+                        '/'+ response.data[2].externalIds.FB + '/picture',
+                        'GET',
+                        {},
+                        function(response) {
+                            game.load.image('highscore2', response.url);
+                            highscore2.loadTexture('highscore2');
+                        }
+                    );
+                }
+
+                if(response.data[3])
+                {
+                    highscore3.setText(response.data[3].HIGHSCORE);
+                    FB.api(
+                        '/'+ response.data[3].externalIds.FB + '/picture',
+                        'GET',
+                        {},
+                        function(response) {
+                            game.load.image('highscore3', response.url);
+                            highscore3.loadTexture('highscore3');
+                        }
+                    );
                 }
             }
         });
