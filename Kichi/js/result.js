@@ -171,6 +171,7 @@ TH.Result.prototype =
         btnKhampha.visible = false;
         btnChoiLai.inputEnabled = true;
         btnKhampha.inputEnabled = true;
+        giftCodePopup.inputEnabled = true;
     },
     onClickShareOnFB: function()
     {

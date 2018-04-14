@@ -58,6 +58,10 @@ TH.Preloader.prototype =
         this.load.image('result_bg', 'assets/result_bg.png');
         this.load.image('play_again', 'assets/play_again.png');
         this.load.image('khampha_uudai', 'assets/khampha_uudai.png');
+        this.load.image('next', "assets/next.png");
+        this.load.image('prev', "assets/prev.png");
+        this.load.image('chan', "assets/chan.png");
+        this.load.image('le', "assets/le.png");
     }, 
     create: function()
     {  
