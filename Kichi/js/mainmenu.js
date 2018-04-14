@@ -125,7 +125,7 @@ TH.MainMenu.prototype =
                 TH.fbAccessToken = response.authResponse.accessToken;
                 TH.MainMenu.fbBtn.visible = false;
                 TH.MainMenu.playButton.visible = true;
-                this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
+                TH.MainMenu.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
                 FB.api(
                     '/me',
                     'GET',
@@ -139,7 +139,7 @@ TH.MainMenu.prototype =
                 if (response.status === 'connected') {
                     // Logged into your app and Facebook.
                     TH.fbAccessToken = response.authResponse.accessToken;
-                    this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
+                    TH.MainMenu.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
                     fbBtn.visible = false;
                     TH.MainMenu.playButton.visible = true;
                     FB.api(
