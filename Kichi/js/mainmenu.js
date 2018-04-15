@@ -141,7 +141,6 @@ TH.MainMenu.prototype =
         //#endregion
     },
     onClickOnBtnFB: function(){
-        game.sound.unlock();
         FB.getLoginStatus(function(response) {
 
             if (response.status == 'connected') {
@@ -181,7 +180,6 @@ TH.MainMenu.prototype =
 
     },
     onClickOnBtnPlay: function(){    
-        game.sound.unlock();
         if(!gamesparks.getAuthToken())    
         {
             this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
