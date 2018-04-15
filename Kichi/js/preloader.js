@@ -62,13 +62,25 @@ TH.Preloader.prototype =
         this.load.image('chan', "assets/chan.png");
         this.load.image('le', "assets/le.png");
 
-        this.load.audio('bg_music', ['sound/bg_music.aac', 'sound/bg_music.ogg'], true);
-        this.load.audio('shoot', ['sound/shoot.aac', 'sound/shoot.ogg'], true);
-        this.load.audio('wrong', ['sound/wrong.aac', 'sound/wrong.ogg'],true);
-        this.load.audio('coin', ['sound/smb_coin.aac', 'sound/smb_coin.ogg'],true);
+        if(game.device.iOS)
+        {
+            this.load.audio('bg_music', 'sound/bg_music.m4a');
+            this.load.audio('shoot', 'sound/shoot.m4a');
+            this.load.audio('wrong', 'sound/wrong.m4a');
+            this.load.audio('coin', 'sound/smb_coin.m4a');
+        }
+        else
+        {
+            this.load.audio('bg_music', 'sound/bg_music.ogg');
+            this.load.audio('shoot', 'sound/shoot.ogg');
+            this.load.audio('wrong', 'sound/wrong.ogg');
+            this.load.audio('coin', 'sound/smb_coin.ogg');
+        }
     }, 
     create: function()
     {   
+        TH.bgMusic = game.add.audio('bg_music', 1, true);
+        TH.bgMusic.play();
         game.state.start("MainMenu");
     }    
 };
