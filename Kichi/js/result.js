@@ -107,13 +107,12 @@ TH.Result.prototype =
                 {
                     highscore1.setText(response.data[0].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false',
+                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false&width=155&height=155',
                         'GET',
                         {},
                         function(gImgResponse) {
                             var myLoader = new Phaser.Loader(game);
                             myLoader.image('highscore1', gImgResponse.data.url );
-                            console.log('data.url: ' + JSON.stringify(gImgResponse.data.url));
                             myLoader.onLoadComplete.addOnce(function(){
                                 avatar1.loadTexture('highscore1');
                             });
@@ -125,12 +124,16 @@ TH.Result.prototype =
                 {
                     highscore2.setText(response.data[1].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[1].externalIds.FB + '/picture',
+                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false&width=155&height=155',
                         'GET',
                         {},
-                        function(response) {
-                            game.load.image('highscore2', response.url);
-                            avatar2.loadTexture('highscore2');
+                        function(gImgResponse) {
+                            var myLoader = new Phaser.Loader(game);
+                            myLoader.image('highscore2', gImgResponse.data.url );
+                            myLoader.onLoadComplete.addOnce(function(){
+                                avatar1.loadTexture('highscore2');
+                            });
+                            myLoader.start();                     
                         }
                     );
                 }
@@ -139,12 +142,16 @@ TH.Result.prototype =
                 {
                     highscore3.setText(response.data[2].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[2].externalIds.FB + '/picture',
+                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false&width=155&height=155',
                         'GET',
                         {},
-                        function(response) {
-                            game.load.image('highscore3', response.url);
-                            avatar3.loadTexture('highscore3');
+                        function(gImgResponse) {
+                            var myLoader = new Phaser.Loader(game);
+                            myLoader.image('highscore3', gImgResponse.data.url );
+                            myLoader.onLoadComplete.addOnce(function(){
+                                avatar1.loadTexture('highscore3');
+                            });
+                            myLoader.start();                     
                         }
                     );
                 }
