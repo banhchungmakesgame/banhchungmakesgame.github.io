@@ -124,7 +124,7 @@ TH.Result.prototype =
                 {
                     highscore2.setText(response.data[1].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false&width=155&height=155',
+                        '/'+ response.data[1].externalIds.FB + '/picture?redirect=false&width=155&height=155',
                         'GET',
                         {},
                         function(gImgResponse) {
@@ -142,7 +142,7 @@ TH.Result.prototype =
                 {
                     highscore3.setText(response.data[2].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false&width=155&height=155',
+                        '/'+ response.data[2].externalIds.FB + '/picture?redirect=false&width=155&height=155',
                         'GET',
                         {},
                         function(gImgResponse) {
