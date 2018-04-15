@@ -218,7 +218,7 @@ TH.Result.prototype =
     },
     onClickBtnKhamPhaUuDai: function()
     {
-        window.open("http://www.google.com", "_blank");
+        window.open("http://kichi.com.vn/vi/ưu-dai/", "_blank");
     }
 };
 

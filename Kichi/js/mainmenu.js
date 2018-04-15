@@ -26,6 +26,7 @@ TH.MainMenu = function(game){
     var btnPrev;
     var btnNext;
     var gcData = [];
+    var btnSound;
 };
 
 TH.MainMenu.prototype = 
@@ -115,6 +116,28 @@ TH.MainMenu.prototype =
             TH.MainMenu.listGcText.push(gc_text);
         }       
         this.onClickToTitle();
+        btnSound = game.add.image(game.world.width, 0, 'sound_on');
+        if(localStorage.getItem('soundSetting'))
+        {
+            if(localStorage.getItem('soundSetting') == 's_on')
+            {
+                TH.sound = true;
+                btnSound.loadTexture('sound_on');
+            }
+            else
+            {
+                TH.sound = false;
+                btnSound.loadTexture('sound_off');
+            }
+        }
+        else
+        {
+            localStorage.setItem('soundSetting', 's_on');
+            btnSound.loadTexture('sound_on');
+            TH.sound = true;
+        }
+        btnSound.inputEnabled = true;
+        btnSound.events.onInputDown.add(this.onClickBtnSound, this);
         //#endregion
     },
     onClickOnBtnFB: function(){
@@ -236,5 +259,20 @@ TH.MainMenu.prototype =
         TH.MainMenu.listGcText.forEach(element => {
             element.visible = false;
         });
+    },
+    onClickBtnSound: function()
+    {
+        if(TH.sound)
+        {
+            btnSound.loadTexture('sound_off');
+            localStorage.setItem('soundSetting', 's_off');
+            TH.sound = false;
+        }
+        else
+        {
+            btnSound.loadTexture('sound_on');
+            localStorage.setItem('soundSetting', 's_on');
+            TH.sound = true;
+        }
     }
 };

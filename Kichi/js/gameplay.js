@@ -1,25 +1,27 @@
 TH.Gameplay = function(){
-    
+    var spawnAllowed = true;
+    var items;
+    var bullets, gun;    
+    var fireRate;
+    var nextFire; 
+    var spacebarKey;
+    var isReversing = false;
+    var scoreText;
+    var itemSpawnSpeed = 1000;
+    var currentTimer;
+    var bombs;
+    var live1, live2, live3;
+    var effects;
+    var shoot, coin, wrong;
 };
 
-var spawnAllowed = true;
-var items;
-var bullets, gun;    
-var fireRate;
-var nextFire; 
-var spacebarKey;
-var isReversing = false;
-var scoreText;
-var itemSpawnSpeed = 1000;
-var currentTimer;
-var bombs;
-var live1, live2, live3;
-var effects;
 TH.Gameplay.prototype = 
 {
     init: function()
     {
-        var timer, timerEvent, text;           
+        var timer, timerEvent, text;         
+        TH.Gameplay.spawnAllowed = true;  
+        TH.Gameplay.currentTimer = 0;
     },
     preload: function()
     {
@@ -27,6 +29,9 @@ TH.Gameplay.prototype =
     }, 
     create: function()
     {      
+        shoot = game.add.audio('shoot');
+        coin = game.add.audio('coin');
+        wrong = game.add.audio('wrong');
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'ingame_bg');
         bg.anchor.set(0.5);
         nextFire = 0;
@@ -35,7 +40,7 @@ TH.Gameplay.prototype =
         // Create a custom timer
         timer = game.time.create();        
         // Create a delayed event 1m and 30s from now
-        timerEvent = timer.add(Phaser.Timer.MINUTE * 1 + Phaser.Timer.SECOND * 30, this.endTimer, this);        
+        timerEvent = timer.add(Phaser.Timer.MINUTE * 20, this.endTimer, this);        
         // Start the timer
         timer.start();
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -75,23 +80,24 @@ TH.Gameplay.prototype =
         top_bar.anchor.set(0.5);
         top_bar.y += top_bar.height/2;
 
-        live1 = game.add.image(game.world.centerX-30, 95, 'live');
+        live1 = game.add.image(game.world.centerX+250, 95, 'live');
         live1.anchor.set(0.5);
         live1.scale.setTo(1, 1);
         live1.x -= (live1.width/2 + 55);
-        live2 = game.add.image(game.world.centerX-30, 95, 'live');
+        live2 = game.add.image(game.world.centerX+250, 95, 'live');
         live2.anchor.set(0.5);
         live2.scale.setTo(1, 1);
-        live3 = game.add.image(game.world.centerX-30, 95, 'live');
+        live3 = game.add.image(game.world.centerX+250, 95, 'live');
         live3.anchor.set(0.5);
         live3.scale.setTo(1, 1);
         live3.x += (live3.width/2 + 55);        
 
         spacebarKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        text = game.add.bitmapText(game.world.width, 95, 'spaceComics', 'Kichi', 108);
-        text.anchor.set(1, 0.5);
-        text.x -= 45;
+        //text = game.add.bitmapText(game.world.width, 95, 'spaceComics', 'Kichi', 108);
+        //text.anchor.set(1, 0.5);
+        //text.x -= 45;
         scoreText = game.add.bitmapText(45, 95, 'spaceComics', TH.score, 108);
+        scoreText.setText(TH.score);
         scoreText.anchor.set(0, 0.5);
     },
     update: function () {
@@ -99,8 +105,8 @@ TH.Gameplay.prototype =
         {
             return;
         }
-        currentTimer = Math.round((timerEvent.delay - timer.ms) / 1000);
-        text.setText(this.formatTime(currentTimer));
+        TH.Gameplay.currentTimer = 1200 - (Math.round((timerEvent.delay - timer.ms) / 1000));
+        //text.setText(this.formatTime(currentTimer));
         if (game.input.activePointer.isDown)
         {
             this.fire();        
@@ -120,7 +126,6 @@ TH.Gameplay.prototype =
     endTimer: function() {
         // Stop the timer when the delayed event triggers
         timer.stop();
-        game.state.start('Result');
     },
     formatTime: function(s) {
         var minutes = "0" + Math.floor(s / 60);
@@ -134,6 +139,7 @@ TH.Gameplay.prototype =
         }
         if (this.time.now > nextFire && bullets.countDead() > 0)
         {
+            shoot.play();
             nextFire = this.time.now + fireRate;
 
             var bullet = bullets.getFirstDead();
@@ -145,7 +151,8 @@ TH.Gameplay.prototype =
         }
     }, 
     createEnemy: function(){
-        if (spawnAllowed) {
+        if (TH.Gameplay.spawnAllowed) {
+            //dish.play();
             var randomNo = game.rnd.integerInRange(0,1);
             var item;
             if(randomNo == 0)
@@ -213,6 +220,7 @@ TH.Gameplay.prototype =
     {
         if(item.name.startsWith('item'))
         {
+            coin.play();
             var sprite = game.add.sprite(item.centerX, item.centerY, 'fire');
             sprite.scale.setTo(1.75, 1.75);
             sprite.anchor.set(0.5);
@@ -226,6 +234,10 @@ TH.Gameplay.prototype =
             item.loadTexture(item.name + '_open');
             item.name = 'collected';
         }        
+        else if(item.name.startsWith('collected'))
+        {
+            bullet.kill();
+        }
     },
     bombCollisionHandler: function(bullet, item)
     {   
@@ -240,89 +252,89 @@ TH.Gameplay.prototype =
         this.gameOver();        
     },
     getItemSpawnTime: function(){
-        if(currentTimer > 85)
+        if(TH.Gameplay.currentTimer <= 10)
         {
-            return 700;
+            return game.rnd.integerInRange(650, 750);
         }
-        if(currentTimer <= 85 && currentTimer > 80)
+        if(TH.Gameplay.currentTimer > 10 && TH.Gameplay.currentTimer <= 20)
         {
-            return 650;
+            return game.rnd.integerInRange(550, 650);
         }
-        else if(currentTimer <= 80 && currentTimer > 75)
+        else if(TH.Gameplay.currentTimer <= 30 && TH.Gameplay.currentTimer > 20)
         {
-            return 600;
+            return game.rnd.integerInRange(450, 550);
         }
-        else if(currentTimer <= 75 && currentTimer > 70)
+        else if(TH.Gameplay.currentTimer <= 40 && TH.Gameplay.currentTimer > 30)
         {
-            return 550;
+            return game.rnd.integerInRange(450, 550);
         }
-        else if(currentTimer <= 70 && currentTimer > 65)
+        else if(TH.Gameplay.currentTimer <= 50 && TH.Gameplay.currentTimer > 40)
         {
-            return 525;
+            return game.rnd.integerInRange(350, 450);
         }
-        else if(currentTimer <= 65 && currentTimer > 60)
+        else if(TH.Gameplay.currentTimer <= 60 && TH.Gameplay.currentTimer > 50)
         {
-            return 500;
+            return game.rnd.integerInRange(250, 350);
         }
-        else if(currentTimer <= 60 && currentTimer > 55)
+        else if(TH.Gameplay.currentTimer <= 70 && TH.Gameplay.currentTimer > 60)
         {
-            return 475;
+            return game.rnd.integerInRange(230, 250);
         }
-        else if(currentTimer <= 55 && currentTimer > 50)
+        else if(TH.Gameplay.currentTimer <= 80 && TH.Gameplay.currentTimer > 70)
         {
-            return 450;
+            return game.rnd.integerInRange(200, 230);
         }
-        else if(currentTimer <= 50 && currentTimer > 40)
+        else if(TH.Gameplay.currentTimer <= 90 && TH.Gameplay.currentTimer > 80)
         {
-            return 425;
+            return game.rnd.integerInRange(180, 200);
         }
-        else if(currentTimer <= 40 && currentTimer > 20)
+        else if(TH.Gameplay.currentTimer <= 100 && TH.Gameplay.currentTimer > 90)
         {
-            return 400;
+            return game.rnd.integerInRange(160, 180);
         }
-        else if(currentTimer <= 20)
+        else if(TH.Gameplay.currentTimer > 100)
         {
-            return 350;
+            return game.rnd.integerInRange(140, 160);
         }
         else
         {
-            return 700;
+            return game.rnd.integerInRange(650, 750);
         }
     },
     getItemSpeed: function(){
-        if(currentTimer > 80)
+        if(TH.Gameplay.currentTimer <= 10)
         {
             return 3000;
         }
-        else if(currentTimer <= 80 && currentTimer > 70)
+        else if(TH.Gameplay.currentTimer <= 20 && TH.Gameplay.currentTimer > 10)
         {
             return 2800;
         }
-        else if(currentTimer <= 70 && currentTimer > 60)
+        else if(TH.Gameplay.currentTimer <= 30 && TH.Gameplay.currentTimer > 20)
         {
             return 2600;
         }
-        else if(currentTimer <= 60 && currentTimer > 50)
+        else if(TH.Gameplay.currentTimer <= 40 && TH.Gameplay.currentTimer > 30)
         {
             return 2400;
         }
-        else if(currentTimer <= 50 && currentTimer > 40)
+        else if(TH.Gameplay.currentTimer <= 50 && TH.Gameplay.currentTimer > 40)
         {
             return 2200;
         }
-        else if(currentTimer <= 40 && currentTimer > 30)
+        else if(TH.Gameplay.currentTimer <= 60 && TH.Gameplay.currentTimer > 50)
         {
             return 2000;
         }
-        else if(currentTimer <= 30 && currentTimer > 20)
+        else if(TH.Gameplay.currentTimer <= 70 && TH.Gameplay.currentTimer > 60)
         {
             return 1900;
         }
-        else if(currentTimer <= 20 && currentTimer > 10)
+        else if(TH.Gameplay.currentTimer <= 80 && TH.Gameplay.currentTimer > 70)
         {
             return 1800;
         }
-        else if(currentTimer <= 5)
+        else if(TH.Gameplay.currentTimer > 80)
         {
             return 1700;
         }
@@ -337,9 +349,10 @@ TH.Gameplay.prototype =
     },
     gameOver: function()
     {
+        wrong.play();
         TH.isGameOver = true;
         game.tweens.removeAll();
         this.game.time.events.removeAll();
-        this.game.time.events.add(0, this.goToResult, this);
+        this.game.time.events.add(2000, this.goToResult, this);
     }
 };

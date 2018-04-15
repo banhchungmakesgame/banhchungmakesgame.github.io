@@ -20,7 +20,6 @@ TH.Preloader.prototype =
         preloaderBar.anchor.set(0, 0.5);
         preloaderBar.x = game.world.centerX - preloaderBar.width / 2;
         this.load.setPreloadSprite(preloaderBar);
-        this.load.video('myway', 'assets/myway.mp4');
         this.load.image('play', 'assets/play.png');
         this.load.image('gun', 'assets/CANON.png');
         this.load.image('bullet', 'assets/bullet.png');
@@ -62,9 +61,16 @@ TH.Preloader.prototype =
         this.load.image('prev', "assets/prev.png");
         this.load.image('chan', "assets/chan.png");
         this.load.image('le', "assets/le.png");
+
+        this.load.audio('bg_music', 'sound/bg_music.ogg');
+        this.load.audio('shoot', 'sound/shoot.ogg');
+        this.load.audio('wrong', 'sound/wrong.ogg');
+        this.load.audio('coin', 'sound/smb_coin.ogg');
     }, 
     create: function()
     {  
+        TH.bgMusic = game.add.audio('bg_music');
+        TH.bgMusic.play();
         game.state.start("MainMenu");
     }    
 };
