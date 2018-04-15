@@ -110,10 +110,10 @@ TH.Result.prototype =
                         '/'+ response.data[0].externalIds.FB + '/picture',
                         'GET',
                         {},
-                        function(response) {
+                        function(gImgResponse) {
                             var myLoader = new Phaser.Loader(game);
-                            myLoader.image('highscore1', response.url );
-                            console.log('url: ' + response.url);
+                            myLoader.image('highscore1', gImgResponse.url );
+                            console.log('url: ' + gImgResponse.url);
                             myLoader.onLoadComplete.addOnce(function(){
                                 avatar1.loadTexture('highscore1');
                             });
