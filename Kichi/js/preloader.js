@@ -62,10 +62,10 @@ TH.Preloader.prototype =
         this.load.image('chan', "assets/chan.png");
         this.load.image('le', "assets/le.png");
 
-        this.load.audio('bg_music', ['sound/bg_music.mp3', 'sound/bg_music.ogg']);
-        this.load.audio('shoot', ['sound/shoot.mp3', 'sound/shoot.ogg']);
-        this.load.audio('wrong', ['sound/wrong.mp3', 'sound/wrong.ogg']);
-        this.load.audio('coin', ['sound/smb_coin.mp3', 'sound/smb_coin.ogg']);
+        this.load.audio('bg_music', ['sound/bg_music.aac', 'sound/bg_music.ogg']);
+        this.load.audio('shoot', ['sound/shoot.aac', 'sound/shoot.ogg']);
+        this.load.audio('wrong', ['sound/wrong.aac', 'sound/wrong.ogg']);
+        this.load.audio('coin', ['sound/smb_coin.aac', 'sound/smb_coin.ogg']);
     }, 
     create: function()
     {  
