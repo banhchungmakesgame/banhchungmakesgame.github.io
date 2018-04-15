@@ -131,7 +131,7 @@ TH.Result.prototype =
                             var myLoader = new Phaser.Loader(game);
                             myLoader.image('highscore2', gImgResponse.data.url );
                             myLoader.onLoadComplete.addOnce(function(){
-                                avatar1.loadTexture('highscore2');
+                                avatar2.loadTexture('highscore2');
                             });
                             myLoader.start();                     
                         }
@@ -149,7 +149,7 @@ TH.Result.prototype =
                             var myLoader = new Phaser.Loader(game);
                             myLoader.image('highscore3', gImgResponse.data.url );
                             myLoader.onLoadComplete.addOnce(function(){
-                                avatar1.loadTexture('highscore3');
+                                avatar3.loadTexture('highscore3');
                             });
                             myLoader.start();                     
                         }
