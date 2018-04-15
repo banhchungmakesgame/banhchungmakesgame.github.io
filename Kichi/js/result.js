@@ -100,6 +100,7 @@ TH.Result.prototype =
         highscore3.tint = 0x085282;
 
         gamesparks.leaderboardDataRequest(null, 3, null, "KICHI_LB", 0, null, function(response){
+            
             if(response && response.data && response.data.length > 0)
             {
                 if(response.data[0])
@@ -110,9 +111,14 @@ TH.Result.prototype =
                         'GET',
                         {},
                         function(response) {
-                            var loader = this.game.load.image('highscore1', response.url);
+                            loader = new Phaser.Loader(game);
+                            loader.image('highscore1', response.url );
+                            loader.atlasJSONHash('highscore', '/highscore' , '/highscoreAtlas' );
+                            loader.onLoadComplete.addOnce(onLoaded);
                             loader.start();
-                            avatar1.loadTexture('highscore1');
+                            onLoaded = function(){   
+                                avatar1.loadTexture('highscore1');
+                            }                            
                         }
                     );
                 }
