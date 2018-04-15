@@ -69,7 +69,7 @@ TH.Preloader.prototype =
     }, 
     create: function()
     {  
-        TH.bgMusic = game.add.audio('bg_music');
+        TH.bgMusic = game.add.audio('bg_music', 1, true);
         TH.bgMusic.play();
         game.state.start("MainMenu");
     }    
