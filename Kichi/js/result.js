@@ -113,7 +113,6 @@ TH.Result.prototype =
                         function(response) {
                             loader = new Phaser.Loader(game);
                             loader.image('highscore1', response.url );
-                            loader.atlasJSONHash('highscore', '/highscore' , '/highscoreAtlas' );
                             loader.onLoadComplete.addOnce(function(){
                                 avatar1.loadTexture('highscore1');
                             });
