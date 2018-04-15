@@ -68,7 +68,8 @@ TH.Preloader.prototype =
         this.load.audio('coin', ['sound/smb_coin.aac', 'sound/smb_coin.ogg']);
     }, 
     create: function()
-    {  
+    {   
+        game.sound.setTouchLock();
         TH.bgMusic = game.add.audio('bg_music', 1, true);
         TH.bgMusic.play();
         game.state.start("MainMenu");
