@@ -107,7 +107,7 @@ TH.Result.prototype =
                 {
                     highscore1.setText(response.data[0].HIGHSCORE);
                     FB.api(
-                        '/'+ response.data[0].externalIds.FB + '/picture',
+                        '/'+ response.data[0].externalIds.FB + '/picture?redirect=false',
                         'GET',
                         {},
                         function(gImgResponse) {
