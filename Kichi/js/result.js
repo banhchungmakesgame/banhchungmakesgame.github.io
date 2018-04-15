@@ -113,7 +113,7 @@ TH.Result.prototype =
                         function(gImgResponse) {
                             var myLoader = new Phaser.Loader(game);
                             myLoader.image('highscore1', gImgResponse.url );
-                            console.log('url: ' + gImgResponse.url);
+                            console.log('url: ' + JSON.stringify(gImgResponse));
                             myLoader.onLoadComplete.addOnce(function(){
                                 avatar1.loadTexture('highscore1');
                             });
