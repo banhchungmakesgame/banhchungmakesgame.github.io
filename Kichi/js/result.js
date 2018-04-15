@@ -111,12 +111,13 @@ TH.Result.prototype =
                         'GET',
                         {},
                         function(response) {
-                            loader = new Phaser.Loader(game);
-                            loader.image('highscore1', response.url );
-                            loader.onLoadComplete.addOnce(function(){
+                            var myLoader = new Phaser.Loader(game);
+                            myLoader.image('highscore1', response.url );
+                            console.log('url: ' + response.url);
+                            myLoader.onLoadComplete.addOnce(function(){
                                 avatar1.loadTexture('highscore1');
                             });
-                            loader.start();                     
+                            myLoader.start();                     
                         }
                     );
                 }
