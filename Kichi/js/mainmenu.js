@@ -141,6 +141,10 @@ TH.MainMenu.prototype =
         //#endregion
     },
     onClickOnBtnFB: function(){
+        if(this.game.device.iOS)
+        {
+            game.sound.unlock();
+        }
         FB.getLoginStatus(function(response) {
 
             if (response.status == 'connected') {
