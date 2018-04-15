@@ -13,6 +13,7 @@ TH.Gameplay = function(){
     var live1, live2, live3;
     var effects;
     var shoot, coin, wrong;
+    var emitter;
 };
 
 TH.Gameplay.prototype = 
@@ -99,6 +100,19 @@ TH.Gameplay.prototype =
         scoreText = game.add.bitmapText(45, 95, 'spaceComics', TH.score, 108);
         scoreText.setText(TH.score);
         scoreText.anchor.set(0, 0.5);
+
+        emitter = game.add.emitter(game.world.centerX, -50, 50);
+        emitter.makeParticles('snow');
+        emitter.setAlpha(0.3, 0.8);
+        emitter.width = game.world.width;
+        emitter.minParticleSpeed.setTo(-300, 30);
+        emitter.maxParticleSpeed.setTo(300, 100);
+        emitter.minParticleScale = 0.1;
+        emitter.maxParticleScale = 0.5;
+        emitter.gravity = 150;
+        //	false means don't explode all the sprites at once, but instead release at a rate of one particle per 100ms
+        //	The 5000 value is the lifespan of each particle before it's killed
+        emitter.start(false, 5000, 100);
     },
     update: function () {
         if(TH.isGameOver)
@@ -192,8 +206,8 @@ TH.Gameplay.prototype =
             item.anchor.set(0.5);            
             
             var tween = this.game.add.tween(item).to({
-            x: [0, 25,50,106,175,259,340,421,507,588,678,759,834,876,898,884,851,786,714,630,546,468,385,306,256,256,301,382,460,538,622,694,756,820,859,895,904,898,881,867,848, 848],
-            y: [0, 87,160,224,268,302,316,324,330,324,330,341,369,444,525,609,676,734,776,799,810,838,863,902,969,1050,1120,1161,1192,1200,1237,1267,1329,1393,1466,1538,1622,1697,1787,1856,1904, 2050],
+            x: [0, 22,33,50,72,94,122,159,220,267,334,399,440,477,524,619,706,759,814,865,895,920,926,920,904,853,789,722,655,611,552,488,415,354,309,251,231,214,237,270,306,343,399,457,516,572,636,669,728,778,828,876,898,920,940,926,918,912,893,859, 859],
+            y: [0, 70,98,151,199,235,277,296,319,330,347,347,349,349,344,333,330,338,360,391,425,478,534,589,651,707,746,757,768,771,782,796,818,838,868,907,963,1039,1075,1134,1167,1187,1203,1223,1242,1242,1259,1270,1295,1318,1360,1418,1480,1560,1653,1717,1798,1845,1881,1907, 2050],
             }, this.getItemSpeed(),Phaser.Easing.Linear.In, true).interpolation(function(v, k){
                 return Phaser.Math.bezierInterpolation(v, k);
             });

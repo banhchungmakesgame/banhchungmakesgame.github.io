@@ -61,6 +61,7 @@ TH.Preloader.prototype =
         this.load.image('prev', "assets/prev.png");
         this.load.image('chan', "assets/chan.png");
         this.load.image('le', "assets/le.png");
+        this.load.image('snow', "assets/snowflake.png");
 
         if(this.game.device.iOS)
         {
