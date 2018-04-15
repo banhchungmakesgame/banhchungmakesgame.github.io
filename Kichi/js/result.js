@@ -117,7 +117,7 @@ TH.Result.prototype =
                             loader.onLoadComplete.addOnce(onLoaded);
                             loader.start();
                             onLoaded = function(){   
-                                avatar1.loadTexture('highscore1');
+                                this.onLoadTextureDone(avatar1, 'highscore1');
                             }                            
                         }
                     );
@@ -225,6 +225,10 @@ TH.Result.prototype =
     onClickBtnKhamPhaUuDai: function()
     {
         window.open("http://kichi.com.vn/vi/ưu-dai/", "_blank");
+    },
+    onLoadTextureDone: function(texture, key)
+    {
+        texture.loadTexture(key);
     }
 };
 

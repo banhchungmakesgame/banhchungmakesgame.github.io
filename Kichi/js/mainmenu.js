@@ -146,7 +146,6 @@ TH.MainMenu.prototype =
             game.sound.unlock();
         }
         FB.getLoginStatus(function(response) {
-
             if (response.status == 'connected') {
                 // Logged into your app and Facebook.
                 TH.fbAccessToken = response.authResponse.accessToken;
@@ -181,7 +180,6 @@ TH.MainMenu.prototype =
             });                
             }
         });     
-
     },
     onClickOnBtnPlay: function(){    
         if(!gamesparks.getAuthToken())    
@@ -189,7 +187,7 @@ TH.MainMenu.prototype =
             this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
         }
         this.game.scale.setMaximum();
-        this.game.scale.startFullScreen(false);
+        //this.game.scale.startFullScreen(false);
         TH.score = 0;
         TH.isPlayAgain = false;
         TH.isGameOver = false;
