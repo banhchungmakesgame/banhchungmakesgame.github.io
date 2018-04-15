@@ -114,7 +114,9 @@ TH.Result.prototype =
                             loader = new Phaser.Loader(game);
                             loader.image('highscore1', response.url );
                             loader.atlasJSONHash('highscore', '/highscore' , '/highscoreAtlas' );
-                            loader.onLoadComplete.addOnce(this.onLoadTextureDone);
+                            loader.onLoadComplete.addOnce(function(){
+                                avatar1.loadTexture('highscore1');
+                            });
                             loader.start();                     
                         }
                     );
@@ -222,10 +224,6 @@ TH.Result.prototype =
     onClickBtnKhamPhaUuDai: function()
     {
         window.open("http://kichi.com.vn/vi/ưu-dai/", "_blank");
-    },
-    onLoadTextureDone: function(texture, key)
-    {
-        texture.loadTexture(key);
     }
 };
 
