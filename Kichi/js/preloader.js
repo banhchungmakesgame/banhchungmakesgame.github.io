@@ -69,9 +69,6 @@ TH.Preloader.prototype =
     }, 
     create: function()
     {   
-        game.sound.setTouchLock();
-        TH.bgMusic = game.add.sound('bg_music', 1, true);
-        TH.bgMusic.play();
         game.state.start("MainMenu");
     }    
 };
