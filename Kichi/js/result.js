@@ -18,22 +18,21 @@ TH.Result.prototype =
     }, 
     create: function()
     {   
-        console.log('md5(TH.achievement.toString(): ' + md5(TH.achievement.toString()));
-        console.log('TH.hashKey: ' + TH.hashKey);
-        console.log('TH.score: ' + TH.score);
-        console.log('(TH.achievement.length * 5): ' + (TH.achievement.length * 5));
-
-        if(md5(TH.achievement.toString()) != TH.hashKey)
+        if(TH.score != 0)
         {
-            return;
-        }
-        else
-        {
-            if(TH.score != (TH.achievement.length * 5))
+            if(md5(TH.achievement.toString()) != TH.hashKey)
             {
                 return;
             }
+            else
+            {
+                if(TH.score != (TH.achievement.length * 5))
+                {
+                    return;
+                }
+            }
         }
+        
         var request = {};
         request["eventKey"] = "KICHI_HIGHSCORE_LB";
         request["HIGHSCORE"] = TH.score
