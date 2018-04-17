@@ -278,7 +278,7 @@ TH.MainMenu.prototype =
             if(response.scriptData.data)
             {
                 TH.MainMenu.data = response.scriptData.data;
-                totalPage = data.length / 9;
+                totalPage = TH.MainMenu.data.length / 9;
                 currentPageIndex = 1;
                 paging.setText(currentPageIndex + '/' + totalPage);
                 var currentPageData = TH.MainMenu.loadGCListByPageIndex(currentPageIndex); 
