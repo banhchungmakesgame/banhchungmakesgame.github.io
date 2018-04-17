@@ -284,7 +284,7 @@ TH.MainMenu.prototype =
                 currentPageIndex = 1;
                 paging.setText(currentPageIndex + '/' + totalPage);
                 var currentPageData = instance.loadGCListByPageIndex(currentPageIndex); 
-                for(var i=0;i<currentPageData.length;i++)
+                for(var i=0;i<9;i++)
                 {
                     if(currentPageData[i])
                     {
@@ -321,7 +321,7 @@ TH.MainMenu.prototype =
         
         paging.setText(currentPageIndex + '/' + totalPage);
         var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
-        for(var i=0;i<currentPageData.length;i++)
+        for(var i=0;i<9;i++)
         {
             if(currentPageData[i])
             {
@@ -351,7 +351,7 @@ TH.MainMenu.prototype =
 
         paging.setText(currentPageIndex + '/' + totalPage);    
         var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
-        for(var i=0;i<currentPageData.length;i++)
+        for(var i=0;i<9;i++)
         {
             if(currentPageData[i])
             {
