@@ -26,6 +26,7 @@ TH.Boot.prototype =
         game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.scale.setMaximum();
+        game.scale.refresh();
         
         gamesparks = new GameSparks();
         gamesparks.initPreview({

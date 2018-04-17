@@ -270,8 +270,6 @@ TH.MainMenu.prototype =
         {
             this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
         }
-        this.game.scale.setMaximum();
-        //this.game.scale.startFullScreen(false);
         TH.score = 0;
         TH.isPlayAgain = false;
         TH.isGameOver = false;
