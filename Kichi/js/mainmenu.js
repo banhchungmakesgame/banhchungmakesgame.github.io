@@ -242,24 +242,8 @@ TH.MainMenu.prototype =
                     }
                 );
             } else {
-                FB.login(function(response) {
-                if (response.status === 'connected') {
-                    // Logged into your app and Facebook.
-                    TH.fbAccessToken = response.authResponse.accessToken;                    
-                    fbBtn.visible = false;
-                    TH.MainMenu.playButton.visible = true;
-                    FB.api(
-                        '/me',
-                        'GET',
-                        {"fields":"id,name"},
-                        function(response) {
-                            TH.fbUserName = response.name;
-                        }
-                    );
-                } else {
-                // The person is not logged into this app or we are unable to tell. 
-                }
-            });                
+                var uri = encodeURI("https://zzvutienhung.github.io/Kichi/");
+                window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
             }
         });     
     },
