@@ -124,7 +124,6 @@ TH.Preloader.prototype =
     }, 
     create: function()
     {   
-        TH.bgMusic = game.add.audio('bg_music', 1, true);    
         game.state.start("MainMenu");
     }
 };

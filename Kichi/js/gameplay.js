@@ -154,9 +154,11 @@ TH.Gameplay.prototype =
         }
         if (this.time.now > nextFire && bullets.countDead() > 0)
         {
-            shoot.play();
+            if(TH.sound == true)
+            {
+                shoot.play();
+            }            
             nextFire = this.time.now + fireRate;
-
             var bullet = bullets.getFirstDead();
 
             bullet.reset(gun.x - 8, gun.y - 8);
@@ -217,7 +219,10 @@ TH.Gameplay.prototype =
     {
         if(item.name.startsWith('item'))
         {
-            coin.play();
+            if(TH.sound == true)
+            {
+                coin.play();
+            }            
             var sprite = game.add.sprite(item.centerX, item.centerY, 'fire');
             sprite.scale.setTo(1.75, 1.75);
             sprite.anchor.set(0.5);
@@ -347,7 +352,11 @@ TH.Gameplay.prototype =
     },
     gameOver: function()
     {
-        blash.play();
+        if(TH.sound == true)
+        {
+            blash.play();
+        }
+        
         TH.isGameOver = true;
         game.tweens.removeAll();
         this.game.time.events.removeAll();

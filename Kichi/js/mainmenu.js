@@ -58,9 +58,7 @@ TH.MainMenu.prototype =
         
     }, 
     create: function()
-    { 
-        TH.bgMusic = game.add.audio('bg_music', 1, true);
-        TH.bgMusic.play();
+    {         
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.scale.setTo(1, 1);
         bg.anchor.set(0.5);
@@ -140,6 +138,8 @@ TH.MainMenu.prototype =
             {
                 TH.sound = true;
                 btnSound.loadTexture('sound_on');
+                TH.bgMusic = game.add.audio('bg_music', 1, true);
+                TH.bgMusic.play();
             }
             else
             {
@@ -152,6 +152,8 @@ TH.MainMenu.prototype =
             localStorage.setItem('soundSetting', 's_on');
             btnSound.loadTexture('sound_on');
             TH.sound = true;
+            TH.bgMusic = game.add.audio('bg_music', 1, true);
+            TH.bgMusic.play();
         }
         btnSound.inputEnabled = true;
         btnSound.events.onInputDown.add(this.onClickBtnSound, this);
@@ -441,12 +443,21 @@ TH.MainMenu.prototype =
             btnSound.loadTexture('sound_off');
             localStorage.setItem('soundSetting', 's_off');
             TH.sound = false;
+            if(TH.bgMusic)
+            {
+                TH.bgMusic.stop();
+            }
         }
         else
         {
             btnSound.loadTexture('sound_on');
             localStorage.setItem('soundSetting', 's_on');
             TH.sound = true;
+            if(!TH.bgMusic)
+            {
+                TH.bgMusic = game.add.audio('bg_music', 1, true);                
+            }
+            TH.bgMusic.play();
         }
     },
     loadGCListByPageIndex: function(pageIndex)
