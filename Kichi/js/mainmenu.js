@@ -277,11 +277,11 @@ TH.MainMenu.prototype =
         gamesparks.sendWithData("LogEventRequest", request, function(response){
             if(response.scriptData.data)
             {
-                data = response.scriptData.data;
+                TH.MainMenu.data = response.scriptData.data;
                 totalPage = data.length / 9;
                 currentPageIndex = 1;
                 paging.setText(currentPageIndex + '/' + totalPage);
-                var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
+                var currentPageData = TH.MainMenu.loadGCListByPageIndex(currentPageIndex); 
                 for(var i=0;i<currentPageData.length;i++)
                 {
                     if(currentPageData[i])
@@ -318,7 +318,7 @@ TH.MainMenu.prototype =
             TH.MainMenu.btnPrev.visible = true;    
         
         paging.setText(currentPageIndex + '/' + totalPage);
-        var currentPageData = TH.MainMenu.loadGCListByPageIndex(currentPageIndex); 
+        var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
         for(var i=0;i<currentPageData.length;i++)
         {
             if(currentPageData[i])
@@ -430,9 +430,9 @@ TH.MainMenu.prototype =
         var pageEnd = pageStart + 9;
         for(var i = pageStart; i < pageEnd; i++)
         {
-            if(data[i])
+            if(TH.MainMenu.data[i])
             {
-                pageDatas.push(data[i]);
+                pageDatas.push(TH.MainMenu.data[i]);
             }
         }
 
