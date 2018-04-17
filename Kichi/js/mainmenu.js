@@ -33,6 +33,7 @@ TH.MainMenu = function(game){
     var gcDesc;
     var blurBg;
     var data;
+    var gcpBlur;
 };
 
 var paging;
@@ -86,6 +87,10 @@ TH.MainMenu.prototype =
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
 
         //#region  show gift code popup
+        TH.MainMenu.gcpBlur = game.add.image(game.world.centerX, game.world.centerY, 'blur_bg');
+        TH.MainMenu.gcpBlur.anchor.set(0.5);
+        TH.MainMenu.gcpBlur.scale.setTo(1, 1);
+        TH.MainMenu.gcpBlur.inputEnabled = true;
         TH.MainMenu.giftCodePopup = this.add.image(game.world.centerX, game.world.centerY, 'list_gc');
         TH.MainMenu.giftCodePopup.anchor.set(0.5);
         TH.MainMenu.giftCodePopup.scale.setTo(1, 1);   
@@ -262,6 +267,7 @@ TH.MainMenu.prototype =
         TH.MainMenu.btnPrev.visible = true;
         TH.MainMenu.btnNext.visible = true;   
         TH.MainMenu.btnClose.visible = true;
+        TH.MainMenu.gcpBlur.visible = true;
         TH.MainMenu.listGcText.forEach(element => {
             element.visible = true;
         });
@@ -312,7 +318,7 @@ TH.MainMenu.prototype =
             TH.MainMenu.btnPrev.visible = true;    
         
         paging.setText(currentPageIndex + '/' + totalPage);
-        var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
+        var currentPageData = TH.MainMenu.loadGCListByPageIndex(currentPageIndex); 
         for(var i=0;i<currentPageData.length;i++)
         {
             if(currentPageData[i])
@@ -392,6 +398,7 @@ TH.MainMenu.prototype =
         TH.MainMenu.btnClose.visible = false;
         TH.MainMenu.btnPrev.visible = false;
         TH.MainMenu.btnNext.visible = false;
+        TH.MainMenu.gcpBlur.visible = false;
         TH.MainMenu.listGcText.forEach(element => {
             element.visible = false;
         });
