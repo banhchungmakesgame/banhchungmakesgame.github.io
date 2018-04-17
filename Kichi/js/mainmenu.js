@@ -34,6 +34,10 @@ TH.MainMenu = function(game){
     var blurBg;
     var data;
     var gcpBlur;
+    var rule_bg;
+    var rule_close;
+    var rule_choingay;
+    var rule_blur;
 };
 
 var paging;
@@ -195,6 +199,28 @@ TH.MainMenu.prototype =
         TH.MainMenu.gcDesc.visible = false;
         TH.MainMenu.blurBg.visible = false;
         this.onClickToTitle();
+
+        instance.rule_blur = game.add.image(game.world.centerX, game.world.centerY, 'blur_bg');
+        instance.rule_blur.anchor.set(0.5);
+        instance.rule_blur.scale.setTo(1, 1);
+        instance.rule_blur.inputEnabled = true;
+
+        instance.rule_bg = game.add.image(game.world.centerX, game.world.centerY, 'rule_popup');
+        instance.rule_bg.anchor.set(0.5);
+        instance.rule_bg.scale.setTo(1, 1);
+        
+        instance.rule_close = game.add.image(game.world.centerX + instance.rule_bg.width / 2 - 75, game.world.centerY - instance.rule_bg.height / 2 + 100, 'btnClose');
+        instance.rule_close.anchor.set(0.5);
+        instance.rule_close.scale.setTo(1, 1);
+
+        instance.rule_choingay = game.add.image(game.world.centerX, game.world.centerY + instance.rule_bg.height/2 + 65, 'start_game');
+        instance.rule_choingay.anchor.set(0.5);
+        instance.rule_choingay.scale.setTo(1, 1);
+        instance.rule_choingay.inputEnabled = true;
+        instance.rule_close.inputEnabled = true;
+        instance.rule_close.events.onInputDown.add(instance.onCloseRulePopup, instance);
+        instance.rule_choingay.events.onInputDown.add(instance.onClickOnBtnPlay, instance);
+        instance.onCloseRulePopup();
     },
     onClickOnBtnFB: function(){
         if(this.game.device.iOS)
@@ -250,7 +276,10 @@ TH.MainMenu.prototype =
         game.state.start('Gameplay');
     },
     onClickOnBtnRules: function(){
-        
+        instance.rule_bg.visible = true;
+        instance.rule_blur.visible = true;
+        instance.rule_choingay.visible = true;
+        instance.rule_close.visible = true;
     },
     onClickOnBtnGift: function(){  
         if(!gamesparks.getAuthToken())
@@ -447,5 +476,12 @@ TH.MainMenu.prototype =
         TH.MainMenu.gcTitle.visible = false;
         TH.MainMenu.gcDesc.visible = false;
         TH.MainMenu.blurBg.visible = false;
+    },
+    onCloseRulePopup:function()
+    {
+        instance.rule_bg.visible = false;
+        instance.rule_blur.visible = false;
+        instance.rule_choingay.visible = false;
+        instance.rule_close.visible = false;
     }
 };

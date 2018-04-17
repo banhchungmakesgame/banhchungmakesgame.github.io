@@ -105,6 +105,7 @@ TH.Preloader.prototype =
         this.load.image('gc_popup', 'assets/gc_popup.png');
         this.load.image('rule_popup', 'assets/rule_popup.png');
         this.load.image('snow_ingame', 'assets/snow_ingame.png');
+        this.load.image('start_game', 'assets/start_game.png');
 
         if(this.game.device.iOS)
         {
