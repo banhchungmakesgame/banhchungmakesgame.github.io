@@ -18,6 +18,17 @@ TH.Result.prototype =
     }, 
     create: function()
     {   
+        if(md5(TH.achievement.toString()) != TH.hashKey)
+        {
+            return;
+        }
+        else
+        {
+            if(TH.score != (TH.achievement.length * 5))
+            {
+                return;
+            }
+        }
         var request = {};
         request["eventKey"] = "KICHI_HIGHSCORE_LB";
         request["HIGHSCORE"] = TH.score

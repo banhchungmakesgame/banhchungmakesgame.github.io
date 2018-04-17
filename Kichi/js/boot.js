@@ -1,5 +1,7 @@
 var TH = {
     score : 0,
+    achievement: [],
+    hashKey: '',
     live: 3,
     isGameOver: false,
     isPlayAgain: false,
@@ -23,8 +25,8 @@ TH.Boot.prototype =
         game.time.advancedTiming = true;
         this.scale.pageAlignHorizontally = true;
         // Maintain aspect ratio
-        game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;      
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;      
+        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         game.scale.setMaximum();
         game.scale.refresh();
         

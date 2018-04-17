@@ -241,6 +241,11 @@ TH.Gameplay.prototype =
             bullet.kill();
         }
     },
+    processAchievement: function(itemName)
+    {
+        TH.achievement.push(itemName);
+        TH.hashKey = md5(TH.achievement.toString());
+    },
     bombCollisionHandler: function(bullet, item)
     {   
         item.loadTexture(item.name + '_open');
