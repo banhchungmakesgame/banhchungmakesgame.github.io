@@ -231,6 +231,7 @@ TH.Gameplay.prototype =
             anim.killOnComplete = true;
 
             TH.score += 5;
+            this.processAchievement(item.name);
             scoreText.setText(TH.score);
             bullet.kill();
             item.loadTexture(item.name + '_open');
