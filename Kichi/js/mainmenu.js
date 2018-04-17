@@ -39,6 +39,7 @@ TH.MainMenu = function(game){
 var paging;
 var currentPageIndex;
 var totalPage;
+var instance;
 
 TH.MainMenu.prototype = 
 {
@@ -46,6 +47,7 @@ TH.MainMenu.prototype =
     {
         TH.MainMenu.listGcButton = [];
         TH.MainMenu.listGcText = [];
+        instance = this;
     },
     preload: function()
     {
@@ -281,7 +283,7 @@ TH.MainMenu.prototype =
                 totalPage = TH.MainMenu.data.length / 9;
                 currentPageIndex = 1;
                 paging.setText(currentPageIndex + '/' + totalPage);
-                var currentPageData = TH.MainMenu.loadGCListByPageIndex(currentPageIndex); 
+                var currentPageData = instance.loadGCListByPageIndex(currentPageIndex); 
                 for(var i=0;i<currentPageData.length;i++)
                 {
                     if(currentPageData[i])
