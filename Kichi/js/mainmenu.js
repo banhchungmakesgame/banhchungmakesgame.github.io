@@ -32,12 +32,13 @@ TH.MainMenu = function(game){
     var gcText;
     var gcDesc;
     var blurBg;
+    var data;
 };
 
 var paging;
 var currentPageIndex;
 var totalPage;
-var data;
+
 TH.MainMenu.prototype = 
 {
     init: function()
@@ -109,7 +110,7 @@ TH.MainMenu.prototype =
         for(var i=0;i<9;i++)
         {
             var gc_text;
-            gc_text = game.add.bitmapText(game.world.centerX, startPoint + (i * 130), 'marvin', 'BFFFFFF', 75);
+            gc_text = game.add.bitmapText(game.world.centerX, startPoint + (i * 130), 'marvin', '', 75);
             gc_text.anchor.set(0.5);
             gc_text.inputEnabled = true;
             gc_text.events.onInputDown.add(this.onClickToGCItem, this);
@@ -274,7 +275,6 @@ TH.MainMenu.prototype =
                 totalPage = data.length / 9;
                 currentPageIndex = 1;
                 paging.setText(currentPageIndex + '/' + totalPage);
-
                 var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
                 for(var i=0;i<currentPageData.length;i++)
                 {
