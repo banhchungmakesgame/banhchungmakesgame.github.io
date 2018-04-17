@@ -221,6 +221,22 @@ TH.MainMenu.prototype =
         instance.rule_close.events.onInputDown.add(instance.onCloseRulePopup, instance);
         instance.rule_choingay.events.onInputDown.add(instance.onClickOnBtnPlay, instance);
         instance.onCloseRulePopup();
+        FB.getLoginStatus(function(response) {
+            if (response.status == 'connected') {
+                // Logged into your app and Facebook.
+                TH.fbAccessToken = response.authResponse.accessToken;
+                fbBtn.visible = false;
+                TH.MainMenu.playButton.visible = true;
+                FB.api(
+                    '/me',
+                    'GET',
+                    {"fields":"id,name"},
+                    function(response) {
+                        TH.fbUserName = response.name;
+                    }
+                );
+            }
+        });
     },
     onClickOnBtnFB: function(){
         if(this.game.device.iOS)
