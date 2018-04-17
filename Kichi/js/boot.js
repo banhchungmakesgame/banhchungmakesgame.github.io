@@ -6,8 +6,7 @@ var TH = {
     fbAccessToken : null,
     fbUserName : null,
     userId : '',
-    sound: true,
-    bgMusic : null
+    sound: true
 };
 
 TH.Boot = function()
@@ -41,16 +40,13 @@ TH.Boot.prototype =
     preload: function()
     {
         this.load.image('preloaderBar', 'assets/progress.png');
-        this.load.image('bg', 'assets/bg.png');
-        this.load.image('title', 'assets/title.png');
+        this.load.image('loading', 'assets/loading.png');
+        this.load.image('pre_title', 'assets/pre_title.png');
     }, 
     create: function()
     {    
-        var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
-        bg.anchor.set(0.5);
-        var title = game.add.image(game.world.centerX, 450, 'title');
-        title.anchor.set(0.5);
-        this.state.start('Preloader');
+        game.stage.backgroundColor = 'f24a41';
+        game.state.start('Preloader');
     },
     onNonce: function(nonce)
     {

@@ -5,7 +5,7 @@ TH.Result = function(){
 };
 var avatar1, avatar2, avatar3;
 var highscore1, highscore2, highscore3;
-var giftCodePopup, giftCodeText;
+var gcPopup, gcTitle, gcText, gcDesc, blurBg;
 var dieukhoan, congratText;
 var btnKhampha, btnChoiLai;
 TH.Result.prototype = 
@@ -159,32 +159,47 @@ TH.Result.prototype =
             }
         });
 
-        giftCodePopup = game.add.image(game.world.centerX, game.world.centerY, 'top_bar');
-        giftCodePopup.anchor.set(0.5);
-        giftCodePopup.scale.setTo(0.9, 9);
+        blurBg = game.add.image(game.world.centerX, game.world.centerY, 'blur_bg');
+        blurBg.anchor.set(0.5);
+        blurBg.scale.setTo(1, 1);
+        blurBg.inputEnabled = true;
+
+        gcPopup = game.add.image(game.world.centerX, game.world.centerY, 'gc_popup');
+        gcPopup.anchor.set(0.5);
+        gcPopup.scale.setTo(1, 1);
         
-        congratText = game.add.text(0, 0, 'Chúc mừng\nbạn đã nhận được giftcode:', {font: 'Tahoma', fontSize: 70 });
-        congratText.anchor.set(0.5);
-        congratText.x = game.world.centerX;
-        congratText.y = game.world.centerY - ((giftCodePopup.height/2) - 200);
-        giftCodeText = game.add.text(0, 0, '', {font: 'Tahoma', fontSize: 108 });
-        giftCodeText.anchor.set(0.5);
-        giftCodeText.x = game.world.centerX;
-        giftCodeText.y = giftCodePopup.y;
-        btnChoiLai = game.add.image(game.world.centerX - 200, game.world.centerY + (giftCodePopup.height/2 - 150), 'play_again');
+        gcTitle = game.add.image(game.world.centerX, game.world.centerY - 370, 'coca_title');
+        gcTitle.anchor.set(0.5);
+        gcTitle.scale.setTo(1, 1);
+
+        gcDesc = game.add.image(game.world.centerX, game.world.centerY + 265, 'coca_desc');
+        gcDesc.anchor.set(0.5);
+        gcDesc.scale.setTo(1, 1);
+
+        gcText = game.add.bitmapText(gcPopup.centerX, 50, 'marvin', 'COCA123456', 85);
+        gcText.anchor.set(0.5);
+        gcText.y = gcTitle.centerX + 250;
+        gcText.tint = 0x096199;
+        
+        btnChoiLai = game.add.image(gcPopup.centerX - 300, gcPopup.centerY + (gcPopup.height/2) + 50, 'play_again');
         btnChoiLai.anchor.set(0.5);
-        btnKhampha = game.add.image(game.world.centerX + 200, game.world.centerY + (giftCodePopup.height/2 - 150), 'khampha_uudai');
+        btnKhampha = game.add.image(gcPopup.centerX + 300, gcPopup.centerY + (gcPopup.height/2) + 50, 'khampha_uudai');
         btnKhampha.anchor.set(0.5);
+
         btnChoiLai.events.onInputDown.add(this.onClickBtnChoiLai, this);
         btnKhampha.events.onInputDown.add(this.onClickBtnKhamPhaUuDai, this);
-        giftCodePopup.visible = false;
-        congratText.visible = false;
-        giftCodeText.visible = false;
-        btnChoiLai.visible = false;
-        btnKhampha.visible = false;
+
         btnChoiLai.inputEnabled = true;
         btnKhampha.inputEnabled = true;
-        giftCodePopup.inputEnabled = true;
+        gcPopup.inputEnabled = true;
+
+        gcPopup.visible = false;
+        gcText.visible = false;
+        gcTitle.visible = false;
+        btnChoiLai.visible = false;
+        btnKhampha.visible = false;    
+        gcDesc.visible = false;
+        blurBg.visible = false;
     },
     onClickShareOnFB: function()
     {
@@ -214,12 +229,34 @@ TH.Result.prototype =
         request["USER_ID"] = TH.userId;
         gamesparks.sendWithData("LogEventRequest", request, function(response){
             //show get code popup
-            giftCodePopup.visible = true;
-            congratText.visible = true;
-            giftCodeText.visible = true;
+            gcPopup.visible = true;
+            gcText.visible = true;
+            gcTitle.visible = true;
             btnChoiLai.visible = true;
-            btnKhampha.visible = true;
-            giftCodeText.setText(response.scriptData.data.code);
+            btnKhampha.visible = true;  
+            gcDesc.visible = true;
+            blurBg.visible = true;
+            gcText.setText(response.scriptData.data.code);
+            if(response.scriptData.data.code.startsWith("COCA"))
+            {
+                gcTitle.loadTexture("coca_title");
+                gcDesc.loadTexture("coca_desc");
+            }
+            else if(response.scriptData.data.code.startsWith("CRM"))
+            {
+                gcTitle.loadTexture("caramel_title");
+                gcDesc.loadTexture("caramel_desc");
+            }
+            else if(response.scriptData.data.code.startsWith("DETO"))
+            {
+                gcTitle.loadTexture("detox_title");
+                gcDesc.loadTexture("detox_desc");
+            }
+            else if(response.scriptData.data.code.startsWith("BFF"))
+            {
+                gcTitle.loadTexture("buffet_title");
+                gcDesc.loadTexture("buffet_desc");
+            }
         });
     },
     onClickBtnChoiLai: function()

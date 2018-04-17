@@ -22,13 +22,22 @@ TH.MainMenu = function(game){
     var listGcButton = [];
     var listGcText = [];
     var giftCodePopup;
-    var titleGC;
+    var btnClose;
     var btnPrev;
     var btnNext;
     var gcData = [];
     var btnSound;
+    var gcPopup;
+    var gcTitle;
+    var gcText;
+    var gcDesc;
+    var blurBg;
 };
 
+var paging;
+var currentPageIndex;
+var totalPage;
+var data;
 TH.MainMenu.prototype = 
 {
     init: function()
@@ -41,7 +50,9 @@ TH.MainMenu.prototype =
         
     }, 
     create: function()
-    {         
+    { 
+        TH.bgMusic = game.add.audio('bg_music', 1, true);
+        TH.bgMusic.play();
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'bg');
         bg.scale.setTo(1, 1);
         bg.anchor.set(0.5);
@@ -74,49 +85,43 @@ TH.MainMenu.prototype =
         giftBtn.events.onInputDown.add(this.onClickOnBtnGift, this);
 
         //#region  show gift code popup
-        TH.MainMenu.giftCodePopup = this.add.image(game.world.centerX, game.world.centerY, 'top_bar');
+        TH.MainMenu.giftCodePopup = this.add.image(game.world.centerX, game.world.centerY, 'list_gc');
         TH.MainMenu.giftCodePopup.anchor.set(0.5);
-        TH.MainMenu.giftCodePopup.scale.setTo(0.9, 9);        
-        TH.MainMenu.titleGC = this.add.text(0, 0, 'Danh sách GIFTCODE', {font: 'Tahoma', fontSize: 55 });
-        TH.MainMenu.titleGC.anchor.set(0.5);
-        TH.MainMenu.titleGC.x = game.world.centerX;
-        TH.MainMenu.titleGC.y = game.world.centerY - ((TH.MainMenu.giftCodePopup.height/2) - 50);
-        TH.MainMenu.btnPrev = game.add.image(game.world.centerX - 400, game.world.centerY + (TH.MainMenu.giftCodePopup.height/2 - 75), 'prev');
+        TH.MainMenu.giftCodePopup.scale.setTo(1, 1);   
+        TH.MainMenu.btnClose = game.add.image(TH.MainMenu.giftCodePopup.centerX + TH.MainMenu.giftCodePopup.width/2 - 60, TH.MainMenu.giftCodePopup.centerY - TH.MainMenu.giftCodePopup.height/2 + 75, 'btnClose');
+        TH.MainMenu.btnClose.anchor.set(0.5);
+        TH.MainMenu.btnClose.scale.setTo(1, 1);     
+        TH.MainMenu.btnClose.inputEnabled = true;
+        TH.MainMenu.btnClose.events.onInputDown.add(this.onClickToTitle, this);
+        TH.MainMenu.btnPrev = game.add.image(game.world.centerX - 300, game.world.centerY + (TH.MainMenu.giftCodePopup.height/2) + 60, 'prev');
+        TH.MainMenu.btnPrev.scale.setTo(0.75, 0.75);
         TH.MainMenu.btnPrev.anchor.set(0.5);
-        TH.MainMenu.btnNext = this.add.image(game.world.centerX + 400, game.world.centerY + (TH.MainMenu.giftCodePopup.height/2 - 75), 'next');
+        TH.MainMenu.btnNext = this.add.image(game.world.centerX + 300, game.world.centerY + (TH.MainMenu.giftCodePopup.height/2) + 60, 'next');
         TH.MainMenu.btnNext.anchor.set(0.5);
+        TH.MainMenu.btnNext.scale.setTo(0.75, 0.75);
         TH.MainMenu.btnPrev.events.onInputDown.add(this.onClickBtnPrev, this);
         TH.MainMenu.btnNext.events.onInputDown.add(this.onClickBtnNext, this);        
         TH.MainMenu.btnPrev.inputEnabled = true;
         TH.MainMenu.btnNext.inputEnabled = true;
         TH.MainMenu.giftCodePopup.inputEnabled = true;
-        TH.MainMenu.titleGC.inputEnabled = true;
-        TH.MainMenu.titleGC.events.onInputDown.add(this.onClickToTitle, this);
 
-        var startPoint = TH.MainMenu.titleGC.y + TH.MainMenu.titleGC.height;
-        for(var i=0;i<15;i++)
+        var startPoint = TH.MainMenu.giftCodePopup.centerX - 70;
+        for(var i=0;i<9;i++)
         {
-            var gc_item;
             var gc_text;
-            if(i%2 == 0)
-            {
-                gc_item = game.add.image(game.world.centerX, startPoint + (i*80) + 25, 'chan');                
-            }
-            else
-            {
-                gc_item = game.add.image(game.world.centerX, startPoint + (i*80) + 25, 'le');                
-            }
-            gc_text = game.add.text(game.world.centerX, startPoint + (i*80) + 25, 'CODE 1', {font: 'Tahoma', fontSize: 35 });
+            gc_text = game.add.bitmapText(game.world.centerX, startPoint + (i * 130), 'marvin', 'BFFFFFF', 75);
             gc_text.anchor.set(0.5);
-            gc_item.anchor.set(0.5);
-            gc_item.name = i;
-            gc_item.inputEnabled = true;
-            gc_item.events.onInputDown.add(this.onClickToGCItem, this);
-            TH.MainMenu.listGcButton.push(gc_item);
+            gc_text.inputEnabled = true;
+            gc_text.events.onInputDown.add(this.onClickToGCItem, this);
             TH.MainMenu.listGcText.push(gc_text);
         }       
-        this.onClickToTitle();
+        paging = game.add.bitmapText(TH.MainMenu.giftCodePopup.centerX + TH.MainMenu.giftCodePopup.width/2 - 125, 
+        TH.MainMenu.giftCodePopup.centerY + TH.MainMenu.giftCodePopup.height/2 - 125, 'marvin', '1/3', 90);
+        paging.anchor.set(0.5);        
         btnSound = game.add.image(game.world.width, 0, 'sound_on');
+        btnSound.anchor.set(0.5);
+        btnSound.x -= btnSound.width - 50;
+        btnSound.y += btnSound.height / 2;
         if(localStorage.getItem('soundSetting'))
         {
             if(localStorage.getItem('soundSetting') == 's_on')
@@ -138,7 +143,50 @@ TH.MainMenu.prototype =
         }
         btnSound.inputEnabled = true;
         btnSound.events.onInputDown.add(this.onClickBtnSound, this);
+
+        var emitter = game.add.emitter(game.world.centerX, -50, 50);
+        emitter.makeParticles('snow');
+        emitter.width = game.world.width;
+        emitter.minParticleSpeed.setTo(10, 30);
+        emitter.maxParticleSpeed.setTo(85, 100);
+        emitter.minParticleScale = 0.5;
+        emitter.maxParticleScale = 1;
+        emitter.gravity = 150;
+        //	false means don't explode all the sprites at once, but instead release at a rate of one particle per 100ms
+        //	The 5000 value is the lifespan of each particle before it's killed
+        emitter.start(false, 5000, 850);
+        emitter.setAlpha(1, 0, 5000);
         //#endregion
+        TH.MainMenu.blurBg = game.add.image(game.world.centerX, game.world.centerY, 'blur_bg');
+        TH.MainMenu.blurBg.anchor.set(0.5);
+        TH.MainMenu.blurBg.scale.setTo(1, 1);
+        TH.MainMenu.blurBg.inputEnabled = true;
+        TH.MainMenu.blurBg.events.onInputDown.add(this.onCloseGCPopup, this);
+
+        TH.MainMenu.gcPopup = game.add.image(game.world.centerX, game.world.centerY, 'gc_popup');
+        TH.MainMenu.gcPopup.anchor.set(0.5);
+        TH.MainMenu.gcPopup.scale.setTo(1, 1);
+        
+        TH.MainMenu.gcTitle = game.add.image(game.world.centerX, game.world.centerY - 370, 'coca_title');
+        TH.MainMenu.gcTitle.anchor.set(0.5);
+        TH.MainMenu.gcTitle.scale.setTo(1, 1);
+
+        TH.MainMenu.gcDesc = game.add.image(game.world.centerX, game.world.centerY + 265, 'coca_desc');
+        TH.MainMenu.gcDesc.anchor.set(0.5);
+        TH.MainMenu.gcDesc.scale.setTo(1, 1);
+
+        TH.MainMenu.gcText = game.add.bitmapText(TH.MainMenu.gcPopup.centerX, 50, 'marvin', 'COCA123456', 85);
+        TH.MainMenu.gcText.anchor.set(0.5);
+        TH.MainMenu.gcText.y = TH.MainMenu.gcTitle.centerX + 250;
+        TH.MainMenu.gcText.tint = 0x096199;
+        TH.MainMenu.gcPopup.inputEnabled = true;
+
+        TH.MainMenu.gcPopup.visible = false;
+        TH.MainMenu.gcText.visible = false;
+        TH.MainMenu.gcTitle.visible = false;    
+        TH.MainMenu.gcDesc.visible = false;
+        TH.MainMenu.blurBg.visible = false;
+        this.onClickToTitle();
     },
     onClickOnBtnFB: function(){
         if(this.game.device.iOS)
@@ -210,22 +258,35 @@ TH.MainMenu.prototype =
             }
         }
         TH.MainMenu.giftCodePopup.visible = true;
-        TH.MainMenu.titleGC.visible = true;
         TH.MainMenu.btnPrev.visible = true;
         TH.MainMenu.btnNext.visible = true;   
+        TH.MainMenu.btnClose.visible = true;
+        TH.MainMenu.listGcText.forEach(element => {
+            element.visible = true;
+        });
         var request = {};
         request["eventKey"] = "GET_LIST_GC_OF_USER";
         request["USER_ID"] = TH.userId;
         gamesparks.sendWithData("LogEventRequest", request, function(response){
             if(response.scriptData.data)
             {
-                for(var i=0;i<15;i++)
+                data = response.scriptData.data;
+                totalPage = data.length / 9;
+                currentPageIndex = 1;
+                paging.setText(currentPageIndex + '/' + totalPage);
+
+                var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
+                for(var i=0;i<currentPageData.length;i++)
                 {
-                    if(response.scriptData.data[i])
+                    if(currentPageData[i])
                     {
-                        TH.MainMenu.listGcButton[i].visible = true;
                         TH.MainMenu.listGcText[i].visible = true;
-                        TH.MainMenu.listGcText[i].setText(response.scriptData.data[i].giftCode);
+                        TH.MainMenu.listGcText[i].setText(currentPageData[i].giftCode);
+                    }
+                    else
+                    {
+                        TH.MainMenu.listGcText[i].visible = false;
+                        TH.MainMenu.listGcText[i].setText('');
                     }
                 }
             }
@@ -239,25 +300,98 @@ TH.MainMenu.prototype =
     },
     onClickBtnNext: function()
     {
+        if(currentPageIndex >= totalPage)
+            return;
 
+        if(currentPageIndex < totalPage)
+            currentPageIndex ++;
+
+        if(currentPageIndex == totalPage)
+            TH.MainMenu.btnNext.visible = false;   
+        if(currentPageIndex > 1)
+            TH.MainMenu.btnPrev.visible = true;    
+        
+        paging.setText(currentPageIndex + '/' + totalPage);
+        var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
+        for(var i=0;i<currentPageData.length;i++)
+        {
+            if(currentPageData[i])
+            {
+                TH.MainMenu.listGcText[i].visible = true;
+                TH.MainMenu.listGcText[i].setText(currentPageData[i].giftCode);
+            }
+            else
+            {
+                TH.MainMenu.listGcText[i].visible = false;
+                TH.MainMenu.listGcText[i].setText('');
+            }
+        }
     },
     onClickBtnPrev: function()
     {
+        if(currentPageIndex <= 1)
+            return;
 
+        if(currentPageIndex > 1)
+            currentPageIndex --;
+
+        if(currentPageIndex == 1)
+            TH.MainMenu.btnPrev.visible = false;    
+        
+        if(currentPageIndex < totalPage)
+            TH.MainMenu.btnNext.visible = true;    
+
+        paging.setText(currentPageIndex + '/' + totalPage);    
+        var currentPageData = this.loadGCListByPageIndex(currentPageIndex); 
+        for(var i=0;i<currentPageData.length;i++)
+        {
+            if(currentPageData[i])
+            {
+                TH.MainMenu.listGcText[i].visible = true;
+                TH.MainMenu.listGcText[i].setText(currentPageData[i].giftCode);
+            }
+            else
+            {
+                TH.MainMenu.listGcText[i].visible = false;
+                TH.MainMenu.listGcText[i].setText('');
+            }
+        }
     },
-    onClickToGCItem: function(index)
+    onClickToGCItem: function(item)
     {
-
+        TH.MainMenu.gcPopup.visible = true;
+        TH.MainMenu.gcText.visible = true;
+        TH.MainMenu.gcTitle.visible = true;
+        TH.MainMenu.gcDesc.visible = true;
+        TH.MainMenu.blurBg.visible = true;
+        TH.MainMenu.gcText.setText(item.text);
+        if(item.text.startsWith("COCA"))
+        {
+            TH.MainMenu.gcTitle.loadTexture("coca_title");
+            TH.MainMenu.gcDesc.loadTexture("coca_desc");
+        }
+        else if(item.text.startsWith("CRM"))
+        {
+            TH.MainMenu.gcTitle.loadTexture("caramel_title");
+            TH.MainMenu.gcDesc.loadTexture("caramel_desc");
+        }
+        else if(item.text.startsWith("DETO"))
+        {
+            TH.MainMenu.gcTitle.loadTexture("detox_title");
+            TH.MainMenu.gcDesc.loadTexture("detox_desc");
+        }
+        else if(item.text.startsWith("BFF"))
+        {
+            TH.MainMenu.gcTitle.loadTexture("buffet_title");
+            TH.MainMenu.gcDesc.loadTexture("buffet_desc");
+        }
     },
     onClickToTitle: function()
     {
         TH.MainMenu.giftCodePopup.visible = false;
-        TH.MainMenu.titleGC.visible = false;
+        TH.MainMenu.btnClose.visible = false;
         TH.MainMenu.btnPrev.visible = false;
         TH.MainMenu.btnNext.visible = false;
-        TH.MainMenu.listGcButton.forEach(element => {
-            element.visible = false;
-        });
         TH.MainMenu.listGcText.forEach(element => {
             element.visible = false;
         });
@@ -276,5 +410,33 @@ TH.MainMenu.prototype =
             localStorage.setItem('soundSetting', 's_on');
             TH.sound = true;
         }
+    },
+    loadGCListByPageIndex: function(pageIndex)
+    {
+        if(pageIndex <= 0 || pageIndex > totalPage)
+        {
+            return;
+        }
+
+        var pageDatas = [];
+        var pageStart = (pageIndex - 1) * 9;
+        var pageEnd = pageStart + 9;
+        for(var i = pageStart; i < pageEnd; i++)
+        {
+            if(data[i])
+            {
+                pageDatas.push(data[i]);
+            }
+        }
+
+        return pageDatas;
+    },
+    onCloseGCPopup: function()
+    {
+        TH.MainMenu.gcPopup.visible = false;
+        TH.MainMenu.gcText.visible = false;
+        TH.MainMenu.gcTitle.visible = false;
+        TH.MainMenu.gcDesc.visible = false;
+        TH.MainMenu.blurBg.visible = false;
     }
 };

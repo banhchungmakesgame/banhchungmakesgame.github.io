@@ -12,7 +12,7 @@ TH.Gameplay = function(){
     var bombs;
     var live1, live2, live3;
     var effects;
-    var shoot, coin, wrong;
+    var shoot, coin, blash;
     var emitter;
 };
 
@@ -30,9 +30,10 @@ TH.Gameplay.prototype =
     }, 
     create: function()
     {      
+        game.sound.remove(TH.bgMusic);
         shoot = game.add.audio('shoot');
         coin = game.add.audio('coin');
-        wrong = game.add.audio('wrong');
+        blash = game.add.audio('blash');
         var bg = game.add.image(game.world.centerX, game.world.centerY, 'ingame_bg');
         bg.anchor.set(0.5);
         nextFire = 0;
@@ -67,8 +68,8 @@ TH.Gameplay.prototype =
         bullets.setAll('checkWorldBounds', true);
         bullets.setAll('outOfBoundsKill', true);
         gun = game.add.sprite(35, game.world.height, 'gun');
-        gun.x += gun.width / 2;
-        gun.y -= gun.height/2 + 35;
+        gun.x += gun.width / 2 + 30;
+        gun.y -= gun.height/2 + 70;
         gun.anchor.set(0.5);
         game.physics.enable(gun, Phaser.Physics.ARCADE);
         gun.body.allowRotation = false;
@@ -81,17 +82,17 @@ TH.Gameplay.prototype =
         top_bar.anchor.set(0.5);
         top_bar.y += top_bar.height/2;
 
-        live1 = game.add.image(game.world.centerX+250, 95, 'live');
+        live1 = game.add.image(game.world.centerX+300, 95, 'live');
         live1.anchor.set(0.5);
         live1.scale.setTo(1, 1);
-        live1.x -= (live1.width/2 + 55);
-        live2 = game.add.image(game.world.centerX+250, 95, 'live');
+        live1.x -= (live1.width/2 + 65);
+        live2 = game.add.image(game.world.centerX+300, 95, 'live');
         live2.anchor.set(0.5);
         live2.scale.setTo(1, 1);
-        live3 = game.add.image(game.world.centerX+250, 95, 'live');
+        live3 = game.add.image(game.world.centerX+300, 95, 'live');
         live3.anchor.set(0.5);
         live3.scale.setTo(1, 1);
-        live3.x += (live3.width/2 + 55);        
+        live3.x += (live3.width/2 + 65);        
 
         spacebarKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         //text = game.add.bitmapText(game.world.width, 95, 'spaceComics', 'Kichi', 108);
@@ -102,17 +103,17 @@ TH.Gameplay.prototype =
         scoreText.anchor.set(0, 0.5);
 
         emitter = game.add.emitter(game.world.centerX, -50, 50);
-        emitter.makeParticles('snow');
-        emitter.setAlpha(0.3, 0.8);
+        emitter.makeParticles('snow_ingame');
         emitter.width = game.world.width;
-        emitter.minParticleSpeed.setTo(-300, 30);
-        emitter.maxParticleSpeed.setTo(300, 100);
-        emitter.minParticleScale = 0.1;
-        emitter.maxParticleScale = 0.5;
+        emitter.minParticleSpeed.setTo(10, 30);
+        emitter.maxParticleSpeed.setTo(85, 100);
+        emitter.minParticleScale = 0.5;
+        emitter.maxParticleScale = 1;
         emitter.gravity = 150;
         //	false means don't explode all the sprites at once, but instead release at a rate of one particle per 100ms
         //	The 5000 value is the lifespan of each particle before it's killed
-        emitter.start(false, 5000, 100);
+        emitter.start(false, 5000, 250);
+        emitter.setAlpha(1, 0, 5000);
     },
     update: function () {
         if(TH.isGameOver)
@@ -172,34 +173,16 @@ TH.Gameplay.prototype =
             if(randomNo == 0)
             {
                 item = items.getFirstDead();
-                var itemType = game.rnd.integerInRange(1, 4);
-                if(itemType == 1)
-                {
-                    item.loadTexture('item1');
-                    item.name = 'item1';
-                }
-                else if(itemType == 2)
-                {
-                    item.loadTexture('item2');
-                    item.name = 'item2';
-                }
-                else if(itemType == 3)
-                {
-                    item.loadTexture('item3');
-                    item.name = 'item3';
-                }
-                else
-                {
-                    item.loadTexture('item4');
-                    item.name = 'item4';
-                }                
+                var itemType = game.rnd.integerInRange(1, 11);           
+                item.loadTexture('item' + itemType);
+                item.name = 'item' + itemType;
                 item.scale.setTo(1);
             }                
             else
             {
                 item = bombs.getFirstDead();
                 item.name = 'bomb';
-                item.scale.setTo(0.75);
+                item.scale.setTo(1);
             }                
 
             item.reset(0, 0);
@@ -256,13 +239,14 @@ TH.Gameplay.prototype =
     bombCollisionHandler: function(bullet, item)
     {   
         item.loadTexture(item.name + '_open');
-        var sprite = game.add.sprite(item.centerX, item.centerY, 'fire');
+        var sprite = game.add.sprite(item.centerX, item.centerY, 'boom');
         sprite.scale.setTo(1.75, 1.75);
         sprite.anchor.set(0.5);
-        var anim = sprite.animations.add('explosion');
-        sprite.animations.play('explosion', 24, false);
+        var anim = sprite.animations.add('blash');
+        sprite.animations.play('blash', 16, false);
         anim.killOnComplete = true;
         bullet.kill();
+        item.kill();
         this.gameOver();        
     },
     getItemSpawnTime: function(){
@@ -363,7 +347,7 @@ TH.Gameplay.prototype =
     },
     gameOver: function()
     {
-        wrong.play();
+        blash.play();
         TH.isGameOver = true;
         game.tweens.removeAll();
         this.game.time.events.removeAll();
