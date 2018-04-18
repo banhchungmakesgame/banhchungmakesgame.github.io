@@ -260,15 +260,38 @@ TH.MainMenu.prototype =
         });     
     },
     onClickOnBtnPlay: function(){    
-        gamesparks.facebookConnectRequest(TH.fbAccessToken, "", function(response) {
-            TH.userId = response.userId;
-            TH.score = 0;
-            TH.hashKey = '';
-            TH.achievement = [];
-            TH.isPlayAgain = false;
-            TH.isGameOver = false;
-            game.state.start('Gameplay');
-        });        
+        if(!TH.fbAccessToken)
+        {
+            FB.getLoginStatus(function(response) {
+                if (response.status == 'connected') {
+                    TH.fbAccessToken = response.authResponse.accessToken;
+                    gamesparks.facebookConnectRequest(response.authResponse.accessToken, "", function(response) {
+                        TH.userId = response.userId;
+                        TH.score = 0;
+                        TH.hashKey = '';
+                        TH.achievement = [];
+                        TH.isPlayAgain = false;
+                        TH.isGameOver = false;
+                        game.state.start('Gameplay');
+                    });      
+                } else {
+                    var uri = encodeURI("https://zzvutienhung.github.io/Kichi/");
+                    window.location = encodeURI("https://www.facebook.com/dialog/oauth?client_id=158000174877255&redirect_uri="+uri+"&response_type=token");
+                }
+            });     
+        }
+        else
+        {
+            gamesparks.facebookConnectRequest(TH.fbAccessToken, "", function(response) {
+                TH.userId = response.userId;
+                TH.score = 0;
+                TH.hashKey = '';
+                TH.achievement = [];
+                TH.isPlayAgain = false;
+                TH.isGameOver = false;
+                game.state.start('Gameplay');
+            });      
+        }          
     },
     onClickOnBtnRules: function(){
         instance.rule_bg.visible = true;
