@@ -269,6 +269,8 @@ TH.MainMenu.prototype =
         gamesparks.facebookConnectRequest(TH.fbAccessToken, "", function(response) {
             TH.userId = response.userId;
             TH.score = 0;
+            TH.hashKey = '';
+            TH.achievement = [];
             TH.isPlayAgain = false;
             TH.isGameOver = false;
             game.state.start('Gameplay');
