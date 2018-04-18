@@ -266,14 +266,13 @@ TH.MainMenu.prototype =
         });     
     },
     onClickOnBtnPlay: function(){    
-        if(!gamesparks.getAuthToken())    
-        {
-            this.gamesparksFacebookAuthenticate(TH.fbAccessToken, TH.fbUserName);
-        }
-        TH.score = 0;
-        TH.isPlayAgain = false;
-        TH.isGameOver = false;
-        game.state.start('Gameplay');
+        gamesparks.facebookConnectRequest(tokenFB, "", function(response) {
+            TH.userId = response.userId;
+            TH.score = 0;
+            TH.isPlayAgain = false;
+            TH.isGameOver = false;
+            game.state.start('Gameplay');
+        });        
     },
     onClickOnBtnRules: function(){
         instance.rule_bg.visible = true;
