@@ -266,7 +266,7 @@ TH.MainMenu.prototype =
         });     
     },
     onClickOnBtnPlay: function(){    
-        gamesparks.facebookConnectRequest(tokenFB, "", function(response) {
+        gamesparks.facebookConnectRequest(TH.fbAccessToken, "", function(response) {
             TH.userId = response.userId;
             TH.score = 0;
             TH.isPlayAgain = false;
