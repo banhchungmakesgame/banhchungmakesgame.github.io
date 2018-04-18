@@ -238,6 +238,12 @@ TH.Result.prototype =
     },
     onClickNhanQua: function()
     {
+        if(TH.score < 50)
+        {
+            window.alert('Bạn phải đạt trên 50 điểm để được nhận quà. hãy chơi lại nhé !!!');
+            game.state.start('MainMenu');
+            return;
+        }
         var request = {};
         request["eventKey"] = "REQUEST_GIFT_CODE";
         request["SCORE"] = TH.score;
