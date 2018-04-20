@@ -113,6 +113,7 @@ TH.Preloader.prototype =
             this.load.audio('shoot', 'sound/shoot.m4a');
             this.load.audio('blash', 'sound/wrong.m4a');
             this.load.audio('coin', 'sound/smb_coin.m4a');
+            this.game.sound.boot();
         }
         else
         {
