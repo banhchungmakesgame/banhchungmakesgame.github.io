@@ -77,12 +77,12 @@ function onResize(){
 
 // create atToolkitContext
 var arToolkitContext = new THREEx.ArToolkitContext({
-    detectionMode: 'color_and_matrix',
-    canvasWidth: 1440,
-    canvasHeight: 1920,
+    detectionMode: 'mono',
+    canvasWidth: 720,
+    canvasHeight: 1280,
 }, {
-    sourceWidth: 1440,
-    sourceHeight: 1920,
+    sourceWidth: 720,
+    sourceHeight: 1280,
 })
 
 // initialize it
@@ -115,9 +115,9 @@ scene.add(root);
 var threeGLTFLoader = new THREE.GLTFLoader();
 var model;
 
-threeGLTFLoader.load("./Flamingo.glb", function (gltf) {
+threeGLTFLoader.load("./model/scene.gltf", function (gltf) {
     model = gltf.scene.children[0];
-    model.name = 'Flamingo';
+    model.name = 'scene';
 
     var animation = gltf.animations[0];
     var mixer = new THREE.AnimationMixer(model);
