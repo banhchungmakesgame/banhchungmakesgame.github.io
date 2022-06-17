@@ -78,11 +78,11 @@ function onResize(){
 // create atToolkitContext
 var arToolkitContext = new THREEx.ArToolkitContext({
     detectionMode: 'mono',
-    canvasWidth: 480,
-    canvasHeight: 640,
+    canvasWidth: 1080,
+    canvasHeight: 1920,
 }, {
-    sourceWidth: 480,
-    sourceHeight: 640,
+    sourceWidth: 1080,
+    sourceHeight: 1920,
 })
 
 // initialize it
