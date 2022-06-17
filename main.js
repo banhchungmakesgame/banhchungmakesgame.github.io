@@ -122,9 +122,10 @@ threeGLTFLoader.load("./model/scene.gltf", function (gltf) {
     root.matrixAutoUpdate = false;
     root.add(model);
 
-    model.position.z = 0;
-    model.position.x = 0;
-    model.position.y = 0;
+    model.position.z = -200;
+    model.position.x = 100;
+    model.position.y = 100;
+    model.scale.set(0.3, 0.3, 0.3);
 
 
     //////////////////////////////////////////////////////////////////////////////////
