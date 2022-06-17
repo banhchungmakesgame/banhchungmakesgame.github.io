@@ -75,7 +75,6 @@ function onResize(){
 
 // create atToolkitContext
 var arToolkitContext = new THREEx.ArToolkitContext({
-    debug: true,
     detectionMode: 'mono'
 })
 
