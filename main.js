@@ -42,8 +42,8 @@ scene.add(light);
 
 var arToolkitSource = new THREEx.ArToolkitSource({
     sourceType : 'webcam',
-    sourceWidth: 640,
-    sourceHeight: 480,
+    sourceWidth: 1920,
+    sourceHeight: 1080,
 })
 
 arToolkitSource.init(function onReady(){
@@ -77,12 +77,9 @@ function onResize(){
 
 // create atToolkitContext
 var arToolkitContext = new THREEx.ArToolkitContext({
-    detectionMode: 'color_and_matrix',
-    canvasWidth: 640,
-    canvasHeight: 480,
-}, {
-    sourceWidth: 640,
-    sourceHeight: 480,
+    detectionMode: 'mono',
+    canvasWidth: 1920,
+    canvasHeight: 1080,
 })
 
 // initialize it
