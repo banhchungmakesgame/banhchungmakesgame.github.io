@@ -119,12 +119,6 @@ threeGLTFLoader.load("./model/scene.gltf", function (gltf) {
     model = gltf.scene.children[0];
     model.name = 'scene';
 
-    var animation = gltf.animations[0];
-    var mixer = new THREE.AnimationMixer(model);
-    mixers.push(mixer);
-    var action = mixer.clipAction(animation);
-    action.play();
-
     root.matrixAutoUpdate = false;
     root.add(model);
 
@@ -139,12 +133,6 @@ threeGLTFLoader.load("./model/scene.gltf", function (gltf) {
 
     var animate = function() {
         requestAnimationFrame(animate);
-
-        if (mixers.length > 0) {
-            for (var i = 0; i < mixers.length; i++) {
-                mixers[i].update(clock.getDelta());
-            }
-        }
 
         if (!arToolkitSource.ready) {
             return;
