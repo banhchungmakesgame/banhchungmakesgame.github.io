@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="manifest" href="manifest.json" />
+	<title>Mogivi - Home Viewer</title>
+	<style>
+		body {
+			overflow: hidden;
+			margin: 0px;
+		}
+
+		#blocker {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		#instructions {
+			width: 100%;
+			height: 100%;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			text-align: center;
+			color: white;
+			font-size: 14px;
+			cursor: pointer;
+		}
+
+		#heightSlider {
+			position: absolute;
+			top: 5px;
+			left: 50%;
+			margin-left: -67px;
+			width: 135px;
+			height: 45px;
+			color: white;
+			text-align: center;
+		}
+
+		#slider {
+			orientation: horizontal;
+			margin: auto;
+		}
+
+		/* #footstep {
+			position: fixed;
+			right: 0px;
+			bottom: 0px;
+			width: 100px;
+			height: 100px;
+			padding: 0px;
+			display: none;
+		}
+
+		#footstep img {
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		} */
+
+		#left_joystick {
+			position: fixed;
+			left: 0px;
+			bottom: 0px;
+			width: 100px;
+			height: 100px;
+			padding: 5px;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
+
+		#portrait_block {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 1);
+			display: none;
+			text-align: center;
+		}
+
+		.phone {
+			display: none;
+			margin: auto;
+		}
+
+		/* @media only screen and (orientation: portrait) {
+
+			#heightSlider,
+			#footstep,
+			#left_joystick {
+				display: none;
+			}
+
+			#portrait_block,
+			.phone {
+				display: flex;
+			}
+		} */
+	</style>
+</head>
+
+<body>
+	<div id="blocker">
+		<div id="instructions">
+			<p style="font-size:36px">
+				Click để bắt đầu tham quan
+			</p>
+			<p>
+				Di chuyển bằng các phím: W, A, S, D<br />
+				Nhìn xung quanh bằng cách rê chuột.<br />
+				Ấn F để nhập đường dẫn file model muốn xem<br />
+				Ấn Q để chuyển giữa các models.
+			</p>
+		</div>
+	</div>
+	<div id="heightSlider">
+		<input type="range" step="0.1" id="slider" />
+		Chiều cao camera
+	</div>
+	<!-- <div id="footstep">
+		<img src="./img/footstep.png" width="75px" height="75px" style="margin-right: 235px;" />
+	</div> -->
+	</div>
+	<div id="left_joystick"></div>
+	<div id="portrait_block">
+		<div class="phone">
+			<img src="./img/rotate.png" width="75%" height="75%" style="margin: auto;" />
+		</div>
+	</div>
+
+	<script type="module" src="bundle.js"></script>
+</body>
+
+</html>
