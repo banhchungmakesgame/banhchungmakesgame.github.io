@@ -71,7 +71,7 @@
           // Feed the HTMLMediaElement into it
           var ctx = window.audioContext;
           const source = ctx.createMediaElementSource(newVideo);
-		  source.type = "audio/mpegurl";
+		  source.type = "application/vnd.apple.mpegurl";
 
           // // Create a gain node
           const gainNode = ctx.createGain();
@@ -407,11 +407,11 @@
       }
       
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/testhls.loader.js";
+      var loaderUrl = buildUrl + "/hlsios.loader.js";
       var config = {
-        dataUrl: buildUrl + "/testhls.data.unityweb",
-        frameworkUrl: buildUrl + "/testhls.framework.js.unityweb",
-        codeUrl: buildUrl + "/testhls.wasm.unityweb",
+        dataUrl: buildUrl + "/hlsios.data.unityweb",
+        frameworkUrl: buildUrl + "/hlsios.framework.js.unityweb",
+        codeUrl: buildUrl + "/hlsios.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "TestHLSIOS",
