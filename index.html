@@ -71,7 +71,7 @@
           // Feed the HTMLMediaElement into it
           var ctx = window.audioContext;
           const source = ctx.createMediaElementSource(newVideo);
-		  source.type = "audio/mpegurl";
+		  source.type = "application/x-mpegURL";
 
           // // Create a gain node
           const gainNode = ctx.createGain();
