@@ -2560,6 +2560,7 @@ var ASM_CONSTS = {
   					  src: 'data:application/vnd.apple.mpegurl;base64,' + window.btoa(text),
   					  type: 'application/vnd.apple.mpegurl'
   					});
+  					player.play();
   					(window.URL || window.webkitURL).revokeObjectURL(path);
   				});
   			}
