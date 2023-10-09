@@ -2543,7 +2543,7 @@ var ASM_CONSTS = {
   			  }
   			});
   			
-  			if(isIOS)
+  			if(!isIOS)
   			{
   				player.src({
   				  src: path,
